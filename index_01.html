@@ -1,0 +1,447 @@
+<script>
+    // multi line comment , single line comments 
+    console.log("Hello World"); // This is inline comment , which is in the line
+    
+    /*
+    here multi line comment 
+    */
+
+
+//  Data Types and Variables
+
+/* undefined, null, boolean , string ,symbol , number ,and object*/
+
+// Explanation :- 
+ // Undefined , which is not define , You may have a variable that you haven't set to be anything yet.
+
+// Null , means nothing , So you have set this to be something and that thing is nothing .
+
+// Boolean , A boolean means true or false .
+
+// String , A symbol is an immutable primitive value that is unique 
+
+// Numbers , A number is a number.
+
+//Object , A object can store a lot of different key value pairs .
+
+// Variable :- A variable allows computer to store and manipulate data in a dynamic fashion  . its basically a label to point to the data .A variable is like a box and you can fill it with anything . You will fill it with the data that you want . 
+
+//Declaring a variable there are three ways  :-
+
+// var can be used throughout your whole program 
+var myName ="Beau";
+
+myName=8;
+ 
+// Let will only be used within the scope of where you declared that .
+let ourName="freecodecamp";
+
+// Const is a variable that can never change.
+const pi =3.14;
+
+
+//  @@@@@@@@@@@@@@@@@@ Storing values with assignment operators #####################
+
+// There is a difference between delcaring variable and assigning varibales . 
+
+var a; // Here we are declaring a variable 
+var b= 2; // Here we are declaring and assigning a variable  and the  = sign is the assignment operator .it means that 2 is being assigned to b.
+
+console.log(a)
+a=7;  //We already declare "a" so we don't have to declare it again .
+b=a; // now we have assign the content of "a" to "b".
+
+console.log(a)
+
+
+
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$ Initializing variables w/ Assignment Operator #################################
+
+var a =9;
+
+// Unintialized variables 
+
+// var a;
+// var b;
+// var c;
+
+// Initialized variables
+
+var a=5;
+var b=10;
+var c="I am a ";
+
+// Do not change code below this line.
+
+a=a+1;
+b=b+5;
+c=c+"String";
+
+console.log(a);
+console.log(b);
+console.log(c);
+
+
+
+// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&& Case Sensitivity in variables $$$$$$$$$$$$$$$$$$$$$$
+
+    // Declarations 
+
+    var studlyCapvar;  //camel case :- The first letter is always going to be lower case , if any new word is there after the first word then ,Every new word has first letter capital.
+    var properCamelCase;    
+    var titleCaseOver;
+
+// Assignments 
+studlyCapvar=10;
+properCamelCase ="A String ";
+titleCaseOver=9000;    
+
+
+// ############## Basic Mathematics operations @@@@@@@@@@@@@@@@@@@@@@@@@2
+
+// Adding Numbers
+
+var sum =10 +10;
+console.log(sum);
+
+// Substracting Numbers
+
+var difference =45-33;
+console.log(difference);
+
+//Multiplying Numbers 
+
+var product =8 *10;
+console.log(product);
+
+//Dividing Numbers
+
+var quotient =66/33;
+console.log(quotient);
+
+//Incrementing Numbers 
+
+var myVar=87;
+
+// only change code below this line
+
+// myVar =myVar+1;
+// There is another way to do that which is done in the upper line .
+
+myVar++;
+
+console.log(myVar)
+
+// Decrementing Numbers
+
+var yourVar =11;
+
+//only change code below this line 
+
+// yourVar=yourVar-1;
+//There is another way to do that which is done in the upper line .
+
+yourVar--;
+console.log(yourVar);
+
+// Decimal Numbers
+
+var ourDecimal  =5.7;
+
+
+// Multipyl Decimals 
+
+var dec =2.0 *2.5;
+
+console.log(dec);
+
+//Divide Decimals 
+
+var rem =4.4/2.0;
+
+console.log(rem);
+
+//Finding a Reminder 
+
+var remainder ;
+remainder =11%3;
+console.log(remainder);
+
+//Compound Assignment with Augmented Addition 
+
+var ab =3;
+var ba =17;
+var ca=12;
+
+// ab=ab+12; 
+// ba=9+ba;
+// ca=ca+7;
+
+// We can apply upper code in another way also :-
+
+ab+=12;
+ba+=9;
+ca+=7;
+console.log(ab);
+console.log(ba);
+console.log(ca);
+
+
+//Compound Assignment with Augmented Subtraction 
+
+var at=11;
+var bt =9;
+var ct=3;
+
+// at=at-6;
+// bt=bt-15;
+// ct=ct-1;
+
+// We can apply upper code in another way also :-
+
+at-=6;
+bt-=15;
+ct-=1;
+
+console.log(at);
+console.log(bt);
+console.log(ct);
+
+// Compound Assignment with Augmented Multiplication 
+
+var ai =5;
+var bi =12;
+var ci=4.6;
+
+// ai= ai*5;
+// bi=3*bi;
+// ci=ci*10;
+
+// We can apply upper code in another way also :-
+
+ai*=5;
+bi*=3;
+ci*=4.6;
+
+console.log(ai);
+console.log(bi);
+console.log(ci);
+
+// Compound assignment with Augmented Division
+
+var ad =48;
+var bd=108;
+var cd =33;
+
+// a=a/12;
+// b=b/4;
+// c=c/11;
+
+// We can apply upper code in another way also :-
+
+ad/=12;
+bd/=4;
+cd/=33;
+
+console.log(ad);
+console.log(bd);
+console.log(cd);
+
+// ###### Declare String Variables #######
+
+var firstName="Alan";
+var lastName="Turning";
+
+// Escaping Literal Quotes in String 
+
+var myStr = "I am a \"double quoted \"String inside \"double quotes ";
+console.log(myStr);
+
+// Quoting Strings with Single Quotes
+
+// var ytStr= "<a href =\"https://www.example.com\"target=\"_blank\">Link</a>'; // Error
+
+// var ytStr= '<a href ="https://www.example.com"target="_blank">Link</a>'; // not because , content is written in single quote.
+
+var ytStr=` '<a href =\"https://www.example.com\"target=\"_blank\">Link</a>'`; // Now we can use both "" and '' also \ at same time.
+
+//Escape Sequences in Strings
+
+    /* CODE OUTPUT
+
+        \'      single quote
+        \"      double quote
+        \\      backslash
+        \n      newline
+        \r      carriage return
+        \t      tab
+        \b      backspace 
+        \f      form feed
+        */
+
+var ttStr="FirstLine\n\t\\ SecondLine\nThirdLine"
+
+//Concatenating Strings with Plus Operator 
+
+var t1 ="I come First ."+"I come second ";
+console.log(t1);
+
+// Concatenating Strings with Plus Equals Operator 
+
+t1+=" Find Your Death";
+console.log(t1);
+
+// Constructing Strings with Variables
+
+var ourNaam="FreeCodeCamp";
+var ourStr="Hellos  , our name is "+ourName+", how are you ?";
+
+console.log(ourStr);
+
+// Appending Variables to Strings 
+
+var anAdjective = " Awesome !";
+var t2="You Freak is ";
+t2+=anAdjective;
+
+console.log(t2);
+
+//Find Length of String
+var gaku =" GakuFallsInLove"
+
+firstNameLength=gaku.length;
+console.log(firstNameLength);
+
+// Bracket Notation to Find First Character in String
+
+// Bracket notation is a way to get a chracter at a specific index within a string.
+
+var example ="Bahut";
+
+// The number 0 , that refers  to first index of the string which would be the B.  a is 1 and , h is 2.
+firstLetterOfFirstName=example[0];
+console.log(firstLetterOfFirstName);
+
+//String Immutability 
+
+var t3Str="Yutal14";
+//String are immutability , meaning they cannot be altered once created . This does not mean that they cannnot changed , just that the individual characters of a string literal cannot be changed 
+
+t3Str [0]="J"; // we cannot change the string like this .
+console.log(t3Str);
+t3Str="Hello World" // but in this way it can be change.
+console.log(t3Str);
+
+
+// Bracket Notation to Find Nth Character in String 
+
+
+var tp ="Ada";
+
+var secondLetterOfFirstName=tp[1];
+console.log(secondLetterOfFirstName);
+var lastL="LoveLace";
+
+var thirdLetterOfLastName =lastL[3];
+console.log(thirdLetterOfLastName)
+
+
+// Bracket Notation to Find Last Character in String 
+
+// Even If you don't know how many letters are there in the string .you can find last letter from the string based on the length.
+
+var tt="WhySoHard";
+
+// The reason why we are doing a-1 is because remember we count starting at 0. So , length-1 is going to be the last index of string . So , you can do that same thing here to get the last letter of the last name.
+var lastLetterOfAnyString=tt[tt.length-1];
+console.log(lastLetterOfAnyString);
+
+// Another Example 
+
+var ato="Sunshine?";
+var lastOne=ato[ato.length-1];
+console.log(lastOne); 
+
+
+// Bracket Notation to Find Nth-to-Last Character in String .
+
+var yo ="Gajab";
+var thirdToLastLetterOfFirstName=yo[yo.length-3];
+console.log(thirdToLastLetterOfFirstName);
+
+// Another Example 
+
+var jo ="Jaadu"
+var secondToLastLetterOfAnyString=jo[jo.length-2];
+console.log(secondToLastLetterOfAnyString);
+
+
+// $$$$$$$$$$$$$$$$$$$ Word Blanks $$$$$$$$$$$$$$$$$$$$$$$$$$$$   Or Functions 
+
+function wordsBlank(myNoun,myAdjective,myVerb,myAdverb) {
+
+    var result="";
+    result+= "The "+ myAdjective+" "+ myNoun +" "+ myVerb + " to the store " + myAdverb;
+    return result;
+}
+
+console.log(wordsBlank("dog","big","ran","quickly"));
+console.log(wordsBlank("bike","slow","flew","slowly"));
+
+
+// ##################   Store Multiple Values with Arrays ########################
+
+var ourArray=["John",23];
+console.log(ourArray);
+
+// Another Example 
+
+var yourArray=["Quincy",1];
+console.log(yourArray);
+
+
+
+// Nested Arrays 
+
+// When one of the elements in any array is another array , that's called a nested array or a multidimensional array.
+
+    var dash=[["the universe",42] ["Everything",101010]];
+
+    // Another Example :-
+    var myArray=[["Bulls",23] ["White Sox", 45]];
+
+
+
+ // Acess Array Data with Indexes 
+ 
+ 
+var beep = [50,60,70];
+var te=beep[0];
+
+console.log(te);
+
+var numb=[50,60,70];
+var st=numb[2];
+console.log(st);
+
+// Modify Array Data with Indexes
+
+var modFic=[18,64,99];
+modFic[1]=45;
+console.log(modFic);
+
+// Another Example :-
+
+var modFic1=[18,64,99];
+modFic1[2]=69;
+console.log(modFic1);
+
+
+// Access Multi-Dimensional Arrays with indexes 
+
+var value=[[1,2,3],[4,5,6], [7.8,9],[[10,11,12],13,14]];
+var myMY=value[0][0];
+console.log(myMY)
+
+
+</script>
