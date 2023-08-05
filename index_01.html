@@ -1235,4 +1235,296 @@ console.log(shirtValue);
 //Accessing Object Properties with Bracket Notation
 
 
+// You can use bracket notation anytime but it is required if the name has a space in it in the properties.
+// As you can see in the below code:- 
+var testObj={
+    "an entree ":"hamburger",
+    "my side":"veggies",
+    "the drink":"water"
+};
+
+var entreeValue=testObj["an entree "]; 
+var drinkValue=testObj['the drink'];
+console.log(entreeValue);
+console.log(drinkValue);
+
+
+// Accessing Object Properties with Variables 
+
+// Bracket notation can also be used to look up object properties using variables.
+
+var testObj={
+    12:"Namath",
+    16:"Montana",
+    19:"Unitas"
+};
+
+var playerNumber=16; // Save the property into variable 
+console.log(playerNumber); // print it
+var player=testObj[playerNumber]; // then give the particular object in which we have to give variable which has number store in it , so it can recognize its data which is 16:"Montana". 
+console.log(player); // Now printing the output.    
+
+
+// Updating Object Properties
+
+// We can use dot notation to update object properties 
+
+var dashDog={
+    "name":"Camper",
+    "legs":4,
+    "tails":1,
+    "friends":["everything"]
+};
+
+dashDog.name="Happy Camper";  // here we changed the value of name using "." notation
+console.log(dashDog);
+
+// Another Example :-
+
+var myDoggy={
+    "name":"Coder",
+    "legs":4,
+    "tails":1,
+    "friends":["freeCodeCamp Campers"]
+};  
+
+myDoggy.name="Happy Coder";
+console.log(myDoggy);
+
+
+// Add New Properties to an Object
+
+// You can add new properties to an object using dot notation or bracket notation.
+var dkDog={
+    "name":"Camper",
+    "legs":4,
+    "tails":1,
+    "friends":["everything"]
+};
+
+dkDog.bark="bow-wow";
+console.log(dkDog);
+
+// Another Example :-
+
+var wildDog={
+    "name":"Happy Coder",
+    "legs":4,
+    "tails":1,
+    "friends":["freeCodeCamp Campers"]
+};
+
+wildDog['bark']="woof!";
+console.log(wildDog)
+
+
+//Delete Properties From an Object
+
+// its simple to delete a property from an object.
+var ikDog={
+    "name":"Camper",
+    "legs":4,
+    "tails":1,
+    "friends":["everything!"],
+    "bark":"bow-wow"
+};
+console.log(ikDog); //Before Deleting  
+delete ikDog.bark;
+console.log(ikDog); //After Deleting 
+
+// Another Example :-
+
+var justDog ={
+    "name":"Happy Coder",
+    "legs":4,
+    "tails":1,
+    "friends":["freeCodeCamp Campers"]
+};
+console.log(justDog);//Before Deleting
+delete justDog.tails;
+console.log(justDog); //After Deleting
+
+
+//Using Objects for LookUps
+
+// Objects can be thought of as a key value storage like a dictionary .You can use an object too lookup values.
+
+
+function phoneticLookUp(val){
+    var result ="";
+
+
+    // We can replace switch statement with object , use the object for lookups instead of the switch statement. 
+
+    // switch(val){
+    //     case "alpha":
+    //         result="Adams";
+    //         break;
+    //         case "bravo":
+    //         result="Boston";
+    //         break;
+    //         case "charlie":
+    //         result="Chicago";
+    //         break;
+    //         case "delta":
+    //         result="denver";
+    //         break;
+    //         case "echo":
+    //         result="Easy";
+    //         break;        
+    //         case "foxtrot":
+    //         result="Frank";
+    //         break;                
+    // }
+
+// Here we are creating object
+
+var lookUp={
+"alpha":"Adams",
+"bravo":"Boston",
+"charlie":"Chicago",
+"delta":"Denver",
+"echo":"Easy",
+"foxtrot":"Frank"
+};
+
+result=lookUp[val];
+return result;
+}
+console.log(phoneticLookUp("charlie"));
+
+
+//Testing Object for Properties
+
+// You can check if an object has a property with the has own property method.  if object has not any property then the below function will return null.
+
+var dashObj={
+    gift:"pony",
+    pet:"kitten",
+    bed:"sleigh"
+};
+
+function checkObj(checkProp){
+  if(  dashObj.hasOwnProperty(checkProp)) // checking if the object has that property or not? if yes then it will return that property value.
+  {
+    return dashObj[checkProp];
+  }
+  else{ // if not then , it will return not found.
+    return "Not Found !";
+  }
+    return "Change Me!";
+}
+console.log(checkObj("gift"));
+
+
+
+//Manipulating Complex Objects 
+
+// A Javascript object is a way to store flexiable data. So , you can store strings , numbers and arrays .And even other Objects.
+
+var myMusic=[{
+    "artist" :"Billy Joel",
+    "title" :"Piano man",
+    "release_year":1973,
+    // here another array starts from below line.
+    "formats":[ 
+        "CD",
+        "8T",
+        "LP"
+    ],
+    "gold":true
+},
+{
+    "artist":"Beau Carnes",
+    "title":"Cereal Man",
+    "release_year":2003,
+    // here another array starts from below line.
+    "formats":[
+    "Youtube Video"
+    ]
+}
+];
+console.log(myMusic);
+
+//Accessing Nested Objects 
+
+var myStorage={
+    "car":{
+        "inside":{
+            "glove box":"maps",
+            "passenger seat":"crumbs"
+        },
+        "outside":{
+            "trunk":"jack"
+        }
+    }
+};
+
+var gloveBoxContents=myStorage.car.inside["glove box"]; // This how we can get value from nested objects 
+console.log(gloveBoxContents);
+
+
+// Accessing Nested Arrays 
+
+
+var myPlants=[ // This is first object , within a object there is array
+    {   
+        type:"flowers",  // 0 index 
+        // Key value pair , 
+        list:[
+            "rose", // [0] [0] index
+            "tulip",// [0] [1] index
+            "dandelion"// [0] [2] index
+        ]
+    },
+    { // This is second object
+        type:"trees", // 1 index
+        list:[
+            "fir", // [1] [0] index
+            "pine",// [1] [1] index
+            "birch"// [1] [2] index
+        ]
+    }
+];
+var secondTree=myPlants[1].list[1];
+console.log(secondTree);
+
+
+
+// Record Colletion
+
+// This is coding challenge we are going to do. we are given this object here which is a record collection . Each record has an ID and then also different pieces of information about the record . They don't all have the same information. And we are supposed to create this updateRecord function , which below after this collection object.
+
+var collection={
+    "2548":{
+        "album":"Slippery When Wet",
+        "artist":"Bon Jovi",
+        "tracks":[
+            "Let It Rock",
+            "You Give Love a Bad Name"
+        ]
+
+    },
+    "2468":{
+        "album":"1999",
+        "artist":"Prince",
+        "tracks":[
+            "1999",
+            "Little Red Corvette"
+        ]
+    },
+    "1245":{
+        "artist":"Robert Palmer",
+        "tracks":[]
+    },
+    "5439":{
+        "album":"ABBA Gold"
+    }
+};
+
+var collectionCopy=JSON.parse(JSON.stringify(collection));
+
+function updateRecords(id,prop,value){
+
+}
 </script>
