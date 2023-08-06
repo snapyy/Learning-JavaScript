@@ -1524,7 +1524,144 @@ var collection={
 
 var collectionCopy=JSON.parse(JSON.stringify(collection));
 
-function updateRecords(id,prop,value){
-
+function updateRecords(id,prop,value){ 
+if(value===""){    // The first condition  we are going to test for is if we need to delete the property , if the value is set to blank we delete that property.
+    delete collection[id][prop]; // here we are giving id from where the data is deleted in our cases ids are number , we are also giving property in which data is updated.
 }
+// next condition we have to look for is if the property is "tracks"  because for most properties we are just going to override property with the value passed into the function.
+else if(prop ==="tracks"){  // if total number of propertys are equal to total number of tracks then 
+    collection[id][prop]=collection[id][prop] ||  []; //if the tracks property is empty , we need to create it. or if it doesn't exist then we create it.
+    collection[id][prop].push(value); // now we know that it exists we can just push the value to the end of the array.
+}else {
+    collection[id][prop]=value; //default condition, if the value isn't blank and the property isn't tracks then we just push the value onto the property .Then we just set the property to equal to the value .
+}
+    return collection;
+}
+updateRecords(2468,"tracks","test");
+console.log(updateRecords(5439,"artist","ABBA"));
+
+
+
+// &&&&&&&&&&&&&&&&&&&&& Loops : Iterate with While Loops %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// Loop allow you to run the same code multiple times.
+
+var justArray=[];
+var i=0;
+while(i<5){
+justArray.push(i);
+i++;
+}
+console.log(justArray);
+
+
+// Iterate with For Loops
+
+var whyArray=[];
+
+for(var i=0;i<5;i++){
+    whyArray.push(i);
+}
+
+console.log(whyArray);
+// Another example :-
+
+var djArray=[];
+
+for(var i=1;i<6;i++){
+     djArray.push(i);
+}
+console.log(djArray);
+
+
+// Iterate Odd Numbers with a For Loop
+
+
+// storing even numbers
+var kyuArray=[];
+
+for(var i=0;i<10;i+=2){
+    kyuArray.push(i);
+}
+console.log(kyuArray);
+
+// Another example storing odd numbers :-
+
+var ajArray=[];
+for(var i=0;i<10;i+=3){
+    ajArray.push(i);
+}
+console.log(ajArray);
+
+
+// Count BackWards with a For Loop
+
+var backArray=[];
+for(var i=10;i>0;i-=2){
+    backArray.push(i)
+}
+console.log(backArray);
+
+// Another Example :-
+
+var bArray=[];
+for(var i=9;i>0;i-=2){
+bArray.push(i);
+}
+console.log(bArray);
+
+// Iterate Through an Array with a For Loop.
+
+// It is a common in JavaScript to iterate through the contents of an array.
+
+var iterate=[9,10,11,12];
+var ourTotal=0;
+
+for(var i=0;i<iterate.length;i++){
+    ourTotal+=iterate[i]; // Sum of all number.
+}
+console.log(iterate);
+console.log(ourTotal); // sum of all number
+
+var helloArray=[2,3,4,5,6];
+var yourTotal=0;
+
+for(i=0;i<helloArray.length;i++){
+    yourTotal+=helloArray[i];
+}
+console.log(helloArray);
+console.log(yourTotal);
+
+
+// Nesting For Loops
+
+// if you have a multidimensional or nested array,you can use nested for loops to access all the array elements.
+
+function multiplyAll(arr){
+    var product=1;
+for(var i=0;i<arr.length;i++){
+    for( var j=0;j<arr[i].length;j++){
+        product*=arr[i][j]; // Multiplying all the array elements.
+    }
+}
+    return product;
+}
+var product=multiplyAll([[1,2],[3,4],[5,6,7]]);
+console.log(product)
+
+
+//Iterate with Do While Loops
+
+//In a do while loop , this is always run at least once before it checks the condition.
+var   allMighty=[];
+var i=10;
+
+do{
+    allMighty.push(i);
+    i++;
+}while (i<5);
+console.log(i,allMighty);
+
+
+//Profile LookUp
 </script>
