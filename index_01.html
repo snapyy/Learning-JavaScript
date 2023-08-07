@@ -1664,4 +1664,141 @@ console.log(i,allMighty);
 
 
 //Profile LookUp
+
+// This is coding challenge . We have this array of objects in our contact list. And You will see each object is one of our contacts.So these are key value pairs here . So , what we want to do is create this lookUpProfile function where we pass in a name.And the property and its going to return the value of that property. For instance , if we pass in the name "Kristian" and we pass in the property of "number" it should return "unknown". so when we pass property it will show value and when we pass value it shows property . if the name that's passsed in does not correspond to any contacts , then our function should return "No such contact". And if there's no property , it should return "No such property".
+
+var contacts =[
+    {
+        "firstName":"Akira",
+        "lastName":"Laine",
+        "number":"0543236543",
+        "likes":["Pizza","Coding","Brownie Points"]
+    },
+    {
+        "firstName":"Harry",
+        "lastName":"Potter",
+        "number":"0994372684",
+        "likes":["Hogwarts","Magic","Hagrid"]
+    },
+    {
+        "firstName":"Sherlock",
+        "lastName":"Holmes",
+        "number":"0487345643",
+        "likes":["Intriguing Cases","Violin"]
+    },
+    {
+        "firstName":"Kristian",
+        "lastName":"Vos",
+        "number":"unknown",
+        "likes":["JavaScript","Gaming","Foxes"]
+    },
+    
+];
+
+function lookUpProfile(name,prop){
+// First thing iterate through each element in the contact list.
+
+for(var i=0;i<contacts.length;i++){
+    // now we check if the name is in the list or not which is passed in the function.
+    if(contacts[i].firstName===name){
+//if the name is in the contact list 
+return contacts[i][prop] || "No Such property"; // if the property does not exist we return || the or condition.
+    }
+}
+// if the name pass that was passed in is not in the array then we are going to return
+return "No Such Content";
+}
+var data=lookUpProfile("Sherlock","Hello");
+console.log(data);
+
+
+// Generate Random Fractions 
+
+// There is a simple way to create a random decimal number in JavaScript.
+
+function randomFraction(){
+
+    return Math.random();
+}
+console.log(randomFraction());
+
+
+
+//Generate Random Whole Numbers 
+
+// Often you want to random whole number instead of a random decimal number.
+
+var randomNumberBetween0and19 =Math.floor(Math.random()*20); // This rounds down to the nearest whole number.this will create whole number from 1 to 19 . it can't be zero and can never be quite 1. so we will get numbers from 0 to 19.
+
+function randomWholeNum(){
+    return Math.floor(Math.random()*10);
+}
+console.log(randomWholeNum());
+
+
+// Generate Random whole Numbers within a Range 
+
+// You can also generate random whole numbers within a range.
+
+function ourRandomRange(ourMin,ourMax){
+    return Math.floor(Math.random()*(ourMax-ourMin+1))+ourMin;
+}
+
+console.log(ourRandomRange(1,9));
+
+
+// Another Example:-
+
+function randomRange(myMin,myMax){
+
+
+    return Math.floor(Math.random()*(myMax-myMin+1))+myMin;
+}
+
+var myRandom=randomRange(5,15);
+console.log(myRandom);
+
+
+// ########################### Use the parseInt Function  $$$$$$$$$$$$$$$$$$$$$$$$$$
+
+// if string cannot convert into number it will return "NAN" . Not A Number. error
+function convertToInteger(str){
+ return parseInt(str);
+}
+console.log(convertToInteger("56"));
+
+
+//Use the parseInt Function with a Radix 
+
+// The radix specifies the base of the number in the string. Such as base 2 or base 7 or base 8.A base 2 would be binary .Now the default is base 10. 
+
+// In the below function converting binary into integer
+function convertToIntegerRadix(str){
+return parseInt(str,2); // now we are passing 2 as base. instead of default base 10.
+}
+
+console.log(convertToIntegerRadix("10011"));
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Use the Conditional (Ternary) Operator ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+// condition ? statement-if-true :statement-if-false;
+function checkEqual(a,b){
+    // Normal if else statements 
+    // if(a===b){
+    //     return true;
+    // }
+    // else{
+    //     return false;
+    // }
+
+// Ternary
+
+return a===b ? true : false;
+
+return a===b;
+}
+
+console.log(checkEqual(1,2));
 </script>
+
