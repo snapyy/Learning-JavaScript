@@ -1800,5 +1800,56 @@ return a===b;
 }
 
 console.log(checkEqual(1,2));
+
+
+
+// Use Multiply Conditional (Ternary) Operator
+
+
+//One of the great things about conditional or ternary operators is that you can nest them within each other which gives them even more power.
+
+
+// Checking whether a number is negative or positive.
+function checkSign(num){
+
+    return num >0 ? "Positive" : num <0 ? "Negative" : "zero";
+}
+
+console.log(checkSign(0));
+
+
+
+// Difference Between the var and let Keywords
+
+
+// if you were going to declare a variable you had to use the var keyword. But starting with ES6 in 2015 we can now delcare variables with let and const as well.
+// "let"  does not let you declare a variable twice. 
+
+
+//let catName="Quincy"; // This one and 
+//let catName="Beau"; // This one both are delcare with let keyword with same variable name , error will be shown "already declared"
+var quote;
+
+// but we can type like this ....
+let catName="Quincy";
+
+catName="Beau";
+function catTalk(){
+    "use strict";  // Now this enables strict mode which catches common coding mistakes and unsafe actions ."use strict" --> at the top of a full JavaScript file or maybe just a function to catch coding mistakes or maybe just in function to catch doing mistakes. such as if you create a variable and don't declare it with var , let , or const.
+    catName="Oliver";
+    quote=catName+" says Meow !";   
+}
+catTalk();
+
+
+
+// $$$$$$$$$$$$$$$$$$$$  Compare Scopes of the var and let Keywords 
+
+function checkScope(){
+    "use strict";
+
+    var i="function scope";
+    1
+}
 </script>
 
