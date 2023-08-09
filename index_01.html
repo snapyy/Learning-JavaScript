@@ -1843,13 +1843,139 @@ catTalk();
 
 
 
-// $$$$$$$$$$$$$$$$$$$$  Compare Scopes of the var and let Keywords 
+// $$$$$$$$$$$$$$$$$$$$  Compare Scopes of the var and let Keywords  $$$$$$$$$$$$$$$$$$$$$$$
 
+
+// When you declare a variable with var , it is declared globally or locally if decalred inside a function . However, let-- the scope of let is limited to the block statement or expression that it was declared in .
 function checkScope(){
     "use strict";
+    //let i="function scope"; // Here this is global variable which is delcare using "let" keyword .
+    
+    if(true){
+       //let i="block scope"; // Here this is local variable which is also delcare using "let" keyword . So precedent of this delcaration is more then the global variable. (Comparing with code line 1853 , When both are uncomment you can see the result.). 
 
-    var i="function scope";
-    1
+       var i="function scope"; // Now here we declare the variable with "var" keyword then as you seen that in the below code line no 1862 this variable can also be use out of this block . as compare to the variable which is declare with "let" keyword.
+        console.log("Block scope i is:  ",i);
+    }
+    console.log("Function scope i is: ", i);
+    return i;
 }
+checkScope();
+
+
+// Declare a Read-Only Variable with the const Keyword  
+
+// Const is another way to delcare a variable , it has all the features of let but its also read only . you cannot reassign a const. All the letter of the constant variable should be in capital so that it will be unique as compare to any other keyword.
+
+function printManyTimes(str){
+    "use strict";
+
+    var sentence = str+ " is cool !";
+    // const sentence = str+ " is cool !"; // if uncomment and comment the upper line then it will throw errir because , we trying to reassign the same variable which is constant . 
+    sentence=str+" is amazing ! " // This variable is declared using any keyword , it has high precedent then the upper one .
+
+    for(var i=0;i<str.length;i+=2){
+        console.log(sentence);
+    }
+}
+printManyTimes("NagarPalika") 
+
+
+
+// Mutate an Array Declared with const 
+
+
+// While you cannot reassign a variable declare with const you can mutate an array.
+const s=[5,7,2];
+function editInPlace(){
+    "use strict";
+
+    //s=[2,5,7]; // Uncomment this line and run , it will show you error.
+
+    //However , we can update the array using bracket notation.
+
+    s[0]=2;
+    s[1]=5;
+    s[2]=7;
+}
+
+editInPlace();
+
+console.log(s);
+
+
+// Prevent Object Mutation 
+
+// As seen previously , a const declaration alone doesn't really protect your data from mutation .if you have an object or an array , you can still mutate it even if its declared with const.There is something called object    "."freeze that will prevent data mutation 
+
+
+function freezObj(){
+"use strict";
+const MATH_CONSTANTS={
+    PI:3.14
+};
+Object.freeze(MATH_CONSTANTS);  // So whenever you have an object and you don't want any of the items in the object to change,use object.freeze.
+try{
+    MATH_CONSTANTS.PI=99;
+}catch(ex){
+    console.log(ex);
+}
+return MATH_CONSTANTS.PI;
+}
+const PI=freezObj();
+console.log(PI);
+
+
+// Use Arrow Functions to Write concise Anonmous Functions 
+
+// Below function is called an anonymous function . it doesn't have a name . it is assigned to this variable magic. but there is no word right before the function keyword to assign the name to the function .Whenever you have anonymous function you can convert it into an arrow function . That makes it a little quicker to write.
+
+    // here is anonymous function
+
+// var magic=function(){
+//     return new Date();
+// };
+
+// here we decalring it using arrow
+
+// we can use var also instead of const but , to make this even nicer.we are not going to use var.
+const magic=()=>new Date(); // return keyword is not used because we just returning one value and also we can remove curly braces.
+
+
+
+// Write Arrow Function with Parameter 
+
+
+// This is normal anonymous function , now we are going to convert it into arrow function.
+var myConcat=function(arr1,arr2){
+    return arr1.concat(arr2);
+};
+
+console.log(myConcat([1,2],[3,4,5]));
+
+
+// Converting arrow function 
+
+var arrowFunction=(arr1,arr2)=>arr1.concat(arr2);
+
+console.log(arrowFunction([1,2],[3,4,5]));
+
+
+//Write Higher Order Arrow Functions 
+
+// Arrow functions work really well with higher order functions such as map , filter , and reduce . They take functions as arguement for processing collections of data. Whenever one function takes another function as an arguement , that's a good time for an arrow function .
+
+
+// In the below code we want it to compute the square of only the positive integers in the array. And we want to filter out everything that's not a positive integer . So we are going to use filter and map function to do that.
+const realNumberArray=[4,5.6,-9.8,3.14,42,6,8.34,-2];
+
+const squareList=(arr)=>{
+    const squareIntegers=arr;
+    return squaredIntegers;
+};
+
+const SquaredIntegers=squareList(realNumberArray);
+console.log(squaredIntegers);
 </script>
+
 
