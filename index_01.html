@@ -1976,6 +1976,178 @@ const squareList=(arr)=>{
 
 const SquaredIntegers=squareList(realNumberArray);
 console.log(squaredIntegers);
+//Write Higher Order Arrow Functions 
+
+// In order to create more flexible functions you can use default parameters .The default parameter kicks in when the arguement is not specified or is undefined 
+
+const increment=(function(){
+    return function increment(number,value=1) { // So if a value isn't passed in , it will be set to 1 automatically , but if it is passed in , it will be to whatever is passed in.
+        return number + value;
+    };
+})();
+console.log(increment(5,2));
+console.log(increment(5));
+
+
+// Use the rest Operator with Functions Parameters
+
+
+//The rest operator allows you to create a function that takes a variable number of arguements .The rest operator is three dots.
+
+//Without rest operator.
+
+// const sum =(function(){
+//     return function sum(x,y,z){
+//         const args=[x,y,z];
+//         return args.reduce((a,b)=>a+b, 0);
+//     };
+// })();
+
+// With rest operator
+
+// This code throwing error because we already dclared sum variable , with const keyword , and now we are trying to declare it again in the function , upper function which is similar to this code is running properly.
+
+// const sum=(function(){
+//     return function sum(...args){ // It will convert everything that's passed in into one array and the array is called args.
+//         // const args=[x,y,z]; // we don't need this line to store the value of input from the function.
+//         return args.reduce((a,b)=>a+b, 0);
+//     };
+// })();
+// console.log(sum(1,2,3,5,6,7,5,6,7,8,9,10)); // we can also add lots of number which are more then 3.
+
+
+
+// Use the spread Operator to Evaluate Arrays In-Place
+
+
+// The spread operator looks just like the rest operator . Three dots but it expands an already existing array. or it spreads out an array. So, it takes an array and spreads it out into its individual parts. 
+
+const arr1=['JAN','FEB','MAR','APR','MAY'];
+let arr2;
+
+// Without Spread Operator.
+
+// (function(){
+//     arr2=arr1;
+//     arr1[0]='potato'
+// })();
+
+// console.log(arr2);
+
+// With Spread Operator 
+
+(function(){
+    arr2=[...arr1]; // it will spread out the contents of arr1 into this new array. So we are not making arr2 equal to arr1. We are making arr2 equal all of the contents of arr1 So they will be different .
+    arr1[0]='potato'
+})();
+
+console.log(arr2);
+
+
+// Use Destructing Assignment to Assign Variables from Objects
+
+
+// This is special syntax for neatly assigning values taken directly from an object to a variable . 
+
+// if we want to take each individual element in this object and assign it its own variable this is the old way of doing it.
+var voxel={x: 3.6,y:7.4,z:6.54}; // This is object 
+
+var x=voxel.x; //x=3.6
+var y=voxel.y; //y=7.4
+var z=voxel.z; //z=6.54
+
+// Now with destructing , there's simple and quicker way to assign variables for each element in an object. 
+
+const{x:d,y:l,z:n}=voxel; // destructing syntax , this time we are creating d,l,n variable and assigning the values from the object d,l and n. You can read it like this get the field of "x" from the object and copy into a value "d".this same goes for b,c also . 
+ 
+
+// Now we are going to to use desctucting to obtain the average temperature for tommorrow.
+const AVG_TEMPERATURES={
+    today:77.5,
+    tommorrow:79
+};
+
+function getTempOfTmrw(avgTemperatures){
+    "use strict";
+
+    // Below line saying get the tommorrow field from the AVG_TEMPRATURES object and assgin  it to the tempOfTommorrow variable. 
+    // use destructuring to get the tommorrow variable out of AVG_TEMPRATURES.
+    const{tommorrow: tempOfTommorrow }=avgTemperatures;
+    return tempOfTommorrow;
+}
+
+console.log(getTempOfTmrw(AVG_TEMPERATURES));
+
+
+// Destructuring Assignment with Nested Objects 
+
+
+// We can also use destructing assignment to assign variables from nested objects 
+
+// In the belo line we have this nested object right here , the local forecast .and inside we have some nested objects. 
+const LOCAL_FORECAST={
+    today:{min:72,max:83},
+    tommorrow:{min:73.3,max:84.6}
+};
+
+// below line we are going to pass forecast
+function getMaxOfTmrw(forecast){
+    "use strict";
+
+    // below line , we are trying to fecth the data from destructuring LOCAL_FORECAST
+    // first we getting tommorrow , after that curly braces we are fecthing data from nested desctruturing , now we need to go inside of the tommorrow object and we need max after that colon and maxOfTommorrow .
+    const {tommorrow :{max :maxOfTommorrow}}=forecast;
+    return maxOfTommorrow;
+}
+
+console.log(getMaxOfTmrw(LOCAL_FORECAST));
+
+
+
+// Use Destructuring Assignment to Assign Variables from Arrays . 
+
+//You can use destructing assignment to assign variables from arrays.
+
+//The difference between desturcting from arrays and destructing from objects is that you cannot specify which element from the array to go into a variable . it just goes in order. However , we can also put it each other place to that particular value.
+
+// here we are gettting particular value from array .
+const [k,h,,u]=[1,2,3,4,5,6];
+console.log(k,h,u);
+
+// Destucturing starts from here.
+let ak=8,bj=6;
+(()=>{ 
+    "use strict";
+    // now using destucturing we are are going to switch places . in the below code.
+    [ak,bj]=[bj,ak];
+})();
+
+console.log(ak);
+console.log(bj);
+
+
+// Use Destructing Assignment with the Rest Operator 
+
+
+// we can use desturcting assignment with the rest operator to reassign array elements . 
+
+const source=[1,2,3,4,5,6,7,8,9,10];
+function removeFirstTwo(list){
+    // below line , to remove the first two , we just have to put two commas here with nothing between them. its saying do nothing for the first element , do nothing for second element .Everything else,put into the arr variable. we are also using "rest" operator.
+    const [,,...arr]=list;
+
+
+    return arr;
+}
+const arr=removeFirstTwo(source);
+console.log(arr);
+console.log(source);
+
+
+// Use Destructing Assignment to Pass an Object as a Function's Parameters.
+
+
+
 </script>
 
 
