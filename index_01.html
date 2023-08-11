@@ -2147,7 +2147,180 @@ console.log(source);
 // Use Destructing Assignment to Pass an Object as a Function's Parameters.
 
 
+// You can use destructuring assignment to pass an object as a function's parameter.
 
+// in below line , stats pass for the half function.
+const stats={
+    max:56.78,
+    standard_deviation:4.34,
+    median:34.54,
+    mode:23.87,
+    min:-0.75,
+    average:35.85
+};
+// below line , Right now we have this half function . And its getting the stats arguement .
+const half =(function(){
+    // Instead of passing the entire stats , we can pass just what we need.
+    // return function half(stats){
+        return function half({max ,min}){ // when stats get passed in , its destructured into just the max and min variables.And the max and min from the function gets passed in.
+        // return (stats.max+stats.min)/2.0;
+        return (max+min)/2.0;  // instead of delcare upper line we can use this line after taking input stats as max , min in the function.
+    };
+})();
+
+console.log(stats);
+console.log(half(stats));
+
+
+// Create  Strings using Template Literals
+
+
+//  Templates literal are a special type of string that makes creating complex strings easier.You make them with this backtick.
+
+const person={
+name:"Zodiac Hasbro",
+age:56
+};
+
+// Template literal with multi-line and string interpoloation
+
+// Few advantages of using these template literals , (1)These backticks instead of quotation marks , are one , you can make multiline strings . (2)You can add single or double quotation marks right in the string and you don't have to escape them.(3) You can put variables right in the string ,see the $ sign and then we have these curly braces . So , anything in between these curly braces that start with the $ is JavaScript. Now in our case we have person.name and person.age which will appear person's name and age in that respective position.it makes things easier that you can put variable right in the strings .
+const greeting=`Hello, my name is ${person.name}!
+I am ${person.age} years old.`;
+
+console.log(greeting);
+
+// Coding Challenge
+
+// we are just trying to store the value using backtick in the array , data will will be inserted same as in the line number 2217 .
+const result={
+success:["max-length","no-amd","prefer-arrow-functions"],
+failure:["no-var","var-on-top","linebreak"],
+skipped:["id-blacklist","no-dup-keys"]
+};
+
+function makeList(arr){
+    const resultDisplayArray=[];
+    for(let i=0;i<arr.length;i++){
+        resultDisplayArray.push(`<li class="text-warning">${arr[i]}</li>`);
+    }
+    return resultDisplayArray;
+}
+
+/**
+ *  makeList(result.failure)should return:
+ * [`<li class="text-warning">no-var</li>`,
+ *  `<li class="text-warning">var-on-top</li>`,
+ *  `<li class=text-warning">linebreak</li>`]
+ * **/
+
+const resultDisplayArray=makeList(result.failure);
+console.log(resultDisplayArray);
+
+
+
+// Write Concise Object Literal Declarations Using Simple Fields 
+
+// Es6 added some nice support for easily defining object literals .
+
+// This is one way to do that  
+
+// const createPerson=(name,age,gender)=>{
+
+// In return , all the values are written in the form of key value pairs , but as you can see in another way , JavaScript already know to make its key value pair.
+
+// return {
+// name:name,
+// age:age,
+// gender:gender
+// };
+// };
+
+// This is another way and easy way to do the same thing.
+
+const createPerson=(name,age,gender)=>({name,age,gender});
+console.log(createPerson("Zodiac Hasbro ",56,"Male"));
+
+
+// Write Consise Declarative Functions 
+
+// An object can contain a function . This is the long way to put a function within an object.
+
+// This is one way to write this code which is long way.
+
+// const bicycle={
+//     gear:2,
+//     setGear:function(newGear){
+//         "use strict";
+//         this.gear=newGear;
+//     }
+// };
+
+// This is shortest way to do that same.
+
+const bicycle={
+gear:2,
+setGear(newGear){
+    "use strict";
+    this.gear=newGear;
+}
+};
+bicycle.setGear(3);
+console.log(bicycle.gear);
+
+// Use class Syntax to Define a Constructor Function 
+
+// ES6 provides a syntax to create object using the class keyword.
+
+//below line , We have this constructor function up here , we use this construct the object . Where we pass in the target ,'Jupiter'.
+// var spaceShuttle=function(targetPlanet){
+//     // Once we create the new object like this , that allows us to do zeus.targetPlanet.
+//     this.targetPlanet=targetPlanet;
+// }
+
+ // Here is older way to create object,in the below line.
+// var zeus=new spaceShuttle('Jupiter');
+
+
+// The class syntax replace the constructor function creation . We are going to use the syntax.
+
+class SpaceShuttle{
+    constructor(targetPlanet){
+        this.targetPlanet=targetPlanet;
+    }
+}
+var zeus=new SpaceShuttle('Jupiter');
+console.log(zeus.targetPlanet);
+
+
+// Another Example of class 
+
+// this is without class 
+// function makeClass(){
+
+//     return Vegetable;
+// }
+// const Vegetable=makeClass();
+// const carrot=new Vegetable('carrot');
+// console.log(carrot.name);
+
+// This function with class.
+
+function makeClass(){
+class Vegetable{
+    constructor(name){
+        this.name=name;
+    }
+}
+return Vegetable;
+}
+const Vegetable=makeClass();
+const carrot=new Vegetable('carrot');
+console.log(carrot.name);
+
+
+
+// Use getters and setters to Control Access to an Object. 
 </script>
 
 
