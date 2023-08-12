@@ -2321,6 +2321,55 @@ console.log(carrot.name);
 
 
 // Use getters and setters to Control Access to an Object. 
-</script>
 
+// with the class object you often want to obtain values from the object and set a value of a property within an object .This are often called getters and setters 
+
+class Book{
+    constructor(author){
+        this._author=author;
+    }
+    // Getter functions are meant to simply return or get the value of an object's private variable to the user without the user directly accessing the private variable.So , the private   variable is this_author that gets when you construct the object.And when we do get writer , its going to return this._author.So , you never actually interact directly with this variable ,but its going to get the writer  which is the author here.
+    get writer(){
+        return this._author;
+    }
+
+    // When you setting , its the same as above . So you never interacting with the _author, but you can set that with the writer setter.This change could invoke caculations or even overriding the previous value completely 
+    set writer(updatedAuthor){
+        this._author=updatedAuthor;
+    }
+
+}
+
+// Another Example of Getters and Setters
+function makeClass(){
+    class Thermostat{
+        constructor(temp){
+            // _temp means , it signify private variable .That you are not supposed to access it outside of that scope or outside of that class. and this means it can only use within this class .
+            this._temp=5/9*(temp-32);
+        }
+        get temperature(){
+            return this._temp;
+        }
+        set temperature(updatedTemp){
+            this._temp=updatedTemp;
+        }
+    }
+return Thermostat;
+} 
+const Thermostat=makeClass();
+const thermos=new Thermostat(76);
+let temp=thermos.temperature;
+thermos.temperature =26;
+temp=thermos.temperature;
+console.log(temp);
+
+
+// Understand the Differences Between import and require 
+
+// In the past people would use the require function to import functions and code from other files.But now we have import and export.You can export code in one file and then import it in another file. it also allows you to only import certain functions from a file or certain variables .
+
+// import {capitalizeString} from "./string_function"; 
+// const cap=capitallizeString("hello");
+// console.log(cap); 
+</script>
 
