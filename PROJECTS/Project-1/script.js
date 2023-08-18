@@ -16,59 +16,65 @@ const playerImage=new Image();
 //In below line , giving path of image .
 playerImage.src='shadow_dog.png';
 
-const spriteWidth=575;
+// Take width of the entire file and divide it by number of columns i get width of one frame. Our source image or spread sheet is 6876 pixels wide and it has 12 pixels  , 6876 divided by 12 is 573 , so we will take it as 575. 5230 is total height of spread sheet or source image , so we have to divide it by number of rows which is 10 , So 523 will be the height of every element or frame in the spread sheet.
+const spriteWidth=575; 
 const spriteHeight=523;
-let frameX=0;
-let frameY=1;
-
+let frameX=0;   // This variable store , frames on x-axis. 
+let frameY=0;   // This variable store , frames on y-axis.
+let gameFrame =0;
+const  staggerFrame =5; // through this variable we can adjust speed of animation. if you increase it will animate slow , if you decrease it will animate fast.
 // This is animation loop function
 function animate(){
 
-    // In below line , it takes four arguements to specify , what area on canvas we want to clear in x-axis and y axis. , width of canvas , height of canvas.
-    ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
-    // ctx.fillRect(50,50,100,100);
+    
 
+ // /////////////////// Below line code , this works but we have to change 2 values , now we are going to apply in another advance way to do that.
+// In below line , it takes four arguements to specify , what area on canvas we want to clear in x-axis and y axis. , width of canvas , height of canvas.
+// ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+// ctx.fillRect(50,50,100,100);
     // Below line is the refernce for the lower code which below 
+    // Below line , is the third version of draw image method accepts nine arguements this gives us the most control over the image , the first arguement is the image you want to draw, next four arguements determine rectugular  area we want to cut out from the source image .Source x Source y Source Width and Source Height and the last four arguements will tell JavaScript Where on our destination canvas  we want to draw just that cropped out part onto destination x destination y destination width and destination height.
+
     // ctx.drawImage(image,sx,sy,sw,sh,dx,dy,dw,dh);
 
-    // In the below line.Now we can draw
-    ctx.drawImage(playerImage,frameX*spriteWidth,frameY*spriteHeight,spriteWidth,spriteHeight,0,0,spriteWidth,spriteHeight);
-    if(frameX<6) frameX++;
-    else frameX=0;
+    // Source x =sx arguement allows us to cycle through sprite sheet horizontally .
+    //if i want to swap between different animations the way our spreadsheet is structured i have to travel through vertically we have source y =sy arguement .
 
-    // In the below line , Built in method which will simply run a function we pass to it.
+    // In the below line.Now we can draw
+
+    // In first image source , after that 4 values to specify a rectangle area to crop out from the original large sprite sheet and last 4 is for telling it where i want that cropped out piece of my sprite sheet to be displayed on canvas.
+   
+
+
+// ctx.drawImage(playerImage,frameX*spriteWidth,frameY*spriteHeight,spriteWidth,spriteHeight,0,0,spriteWidth,spriteHeight);
+    // if(gameFrame%staggerFrames==0){ // if reminder gameFrame/staggerFrames =0 then rest of code will run.
+    // // if frameX from line 10 is less than in columns 7 increase frame x by 1 frame x++ , else meaning when its equal or larger than seven reset it back zero .
+    //     if(frameX<6) frameX++; // frame starts from 0 index value.
+    //     else frameX=0;
+       
+    // }
+    // gameFrame++;
+    // In the below line , Built in method which will simply run a function we pass to it. and if we call the function within function then it will run again and again.
+
+
+// Another and Advance way to animate :-
+
+ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+
+// Below line code output will be like :- 
+/*  gameFrame/staggerFrames =???
+0/5=0       Math.floor(0)=0         
+1/5=0.2     Math.floor(0.1)=0
+2/5=0.4     Math.floor(0.4)=0
+3/5=0.6     Math.floor(0.6)=0
+4/5=0.8     Math.floor(0.8)=0
+5/5=1       Math.floor(1)=1
+*/
+let position =Math.floor(gameFrame/staggerFrame)%6; // getting value in whole numbers without "decimal" value. we are taking 6 because in first row we have 6 frames or elements only. 
+frameX=spriteWidth*position;
+ctx.drawImage(playerImage,frameX,frameY*spriteHeight,spriteWidth,spriteHeight,0,0,spriteWidth,spriteHeight);
+
+gameFrame++;
     requestAnimationFrame(animate);
 };
-animate();      
-
-
-// program to perform function overloading
-
-function sum() {  
-    
-    // if no argument        
-    if (arguments.length == 0) {  
-        console.log('You have not passed any argument');  
-    }
-
-    // if only one argument 
-    else if (arguments.length == 1) {  
-        console.log('Pass at least two arguments');  
-    }
-
-    // multiple arguments
-    else {
-        let result = 0;
-        let length = arguments.length;
-    
-        for (i = 0; i < length; i++) {  
-            result = result + arguments[i];  
-        }  
-        console.log(result); 
-    }  
-}
-
-sum();
-sum(5); 
-sum(5, 9);    
-sum(1, 2, 3, 4, 5, 6, 7, 8, 9); 
+animate();          
