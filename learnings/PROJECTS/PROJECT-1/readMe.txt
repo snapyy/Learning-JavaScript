@@ -1,0 +1,1 @@
+This is project in which we are going to create a game using html ,css and javaScript without using any external libraries and there are some individual parts of the game which runs stands alone , you can easily understand it .
