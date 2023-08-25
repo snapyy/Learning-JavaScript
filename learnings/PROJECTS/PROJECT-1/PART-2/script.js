@@ -5,7 +5,7 @@ const ctx=canvas.getContext('2d');
 const CANVAS_WIDTH=canvas.width=800;
 const CANVAS_HEIGHT=canvas.height=700;
 
-let gameSpeed =10; // This variable will be used controlling speed.
+let gameSpeed =5; // This variable will be used controlling speed.
 
 // importing images into our canvas project .
 const backgroundLayer1=new Image(); 
@@ -19,6 +19,20 @@ backgroundLayer4.src='/backgroundLayers/layer-4.png';
 const backgroundLayer5=new Image();
 backgroundLayer5.src='/backgroundLayers/layer-5.png';
 
+// Calling slider and point javascript towards my new slider .
+const slider=document.getElementById('slider');
+slider.value=gameSpeed;
+// In the below line , we are fetching the current speed of the game and showing it to the user.
+const showGameSpeed=document.getElementById('showGameSpeed');
+// Speed of the game will change as per the gameSpeed variable.
+showGameSpeed.innerHTML=gameSpeed;
+
+// In the below line , listen for change event and in callback function whenever change event occurs on the slider which means whenever user clicks on it change its value.
+slider.addEventListener('change',function(e){
+// console.log(e.target.value); This is line will print in console related to speed etc.
+gameSpeed=e.target.value;
+showGameSpeed.innerHTML=e.target.value; 
+});
 // This is one way to do parallax
 
 //  let x=0; // This x variable which will server as horizontal position for one of my background images.
@@ -78,12 +92,27 @@ ctx.drawImage(this.image,this.x,this.y,this.width,this.height);
 ctx.drawImage(this.image,this.x2,this.y,this.width,this.height); // Drawing same image in horizontal coordinate.
 }
 }
-const layer4=new Layer(backgroundLayer4,0.5); // Calling the constructor and giving argument to perform opearation which we declared in the class.
+const layer1=new Layer(backgroundLayer1,0.5); // Calling the constructor and giving argument to perform opearation which we declared in the class.
+const layer2=new Layer(backgroundLayer2,0.4);
+const layer3=new Layer(backgroundLayer3,0.6);
+const layer4=new Layer(backgroundLayer4,0.8);
+const layer5=new Layer(backgroundLayer5,1);
 
+const gameObjects=[layer1,layer2,layer3,layer4,layer5];
+const gameObject=[]
 function animate(){
     ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
-    layer4.update();
-    layer4.draw();
+    // If i am going to apply for every layer it will make code very lengthy
+    // layer4.update();
+    // layer4.draw();
+    // layer5.update();
+    // layer5.draw();
+
+    // Instead of repeating for all we are going to use for each loop
+    gameObjects.forEach(object =>{
+        object.update();
+        object.draw();
+    });
     requestAnimationFrame(animate);
 };
 animate();
