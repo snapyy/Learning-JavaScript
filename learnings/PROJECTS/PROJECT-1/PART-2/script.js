@@ -6,7 +6,7 @@ const CANVAS_WIDTH=canvas.width=800;
 const CANVAS_HEIGHT=canvas.height=700;
 
 let gameSpeed =5; // This variable will be used controlling speed.
-
+let gameFrame=0; // after creating this variable , i will increase it by one for every animation frame. in line number 127.
 // importing images into our canvas project .
 const backgroundLayer1=new Image(); 
 backgroundLayer1.src='/backgroundLayers/layer-1.png';
@@ -69,7 +69,7 @@ constructor(image,speedModifier){ // speedModifier will set how fast my backgrou
     this.y=0;
     this.width=2400;
     this.height=700;
-    this.x2=this.width;
+    // this.x2=this.width;
     this.image=image;
     this.speedModifier=speedModifier;
     this.speed=gameSpeed*this.speedModifier; // Doing this will allow me to passs different speed modifier value for each of my five layer. and that way each layer will move at a different speed but it will still be tied to my global  game speed.
@@ -77,19 +77,30 @@ constructor(image,speedModifier){ // speedModifier will set how fast my backgrou
 // Below line function will move layers horizontally by changing their disk dot x and this dot x2 and it will reset them when the layers move the screen.
 update(){
     this.speed=gameSpeed*this.speedModifier;
-    if(this.x<=-this.width){
-        this.x=this.width+this.x2-this.speed; // This line will make sure that there is no gap in the background .
-    }
-    if(this.x2<=-this.width){
+   /* if(this.x<=-this.width){
+        this.x=0; // This line will make sure that there is no gap in the background .
+    }*/
+
+    // After removing upper statemnet , completely the backgrounds no longer reset when they leave the screen. and also comment out line number  94
+
+    /*if(this.x2<=-this.width){
         this.x2 =this.width+this.x-this.speed;
     }
-    this.x=Math.floor(this.x-this.speed); // To make background layer to move left i will wrap it in method floor make sure we have to decimal points in there.
-    this.x2=Math.floor(this.x2-this.speed); // Same thing as above.
+    */
+    // this.x=Math.floor(this.x-this.speed); // To make background layer to move left i will wrap it in method floor make sure we have to decimal points in there.
+    // this.x2=Math.floor(this.x-this.speed); // Same thing as above.
+
+    // In upper line , we can also calculate position x differently.
+    // this.x=this.x-this.speed; // After this , i am going to create a variable called gameFrame Variable.
+
+    //All the code will be written in a single line .
+
+    this.x=gameFrame*this.speed%this.width; // after this we have to change in line number 127
  }
 // Below line function job will be to take information about this layer object and to draw it on the canvas every time update method runs to change horizontal x position draw will run again to redraw the image after new position to make sure my game speed is dynamic and always reacting to the current value of my global gameSpeed variable .
 draw(){
 ctx.drawImage(this.image,this.x,this.y,this.width,this.height);
-ctx.drawImage(this.image,this.x2,this.y,this.width,this.height); // Drawing same image in horizontal coordinate.
+ctx.drawImage(this.image,this.x+this.width,this.y,this.width,this.height); // Drawing same image in horizontal coordinate.
 }
 }
 const layer1=new Layer(backgroundLayer1,0.5); // Calling the constructor and giving argument to perform opearation which we declared in the class.
@@ -113,19 +124,7 @@ function animate(){
         object.update();
         object.draw();
     });
+    gameFrame--; // after increasing this , we are going to update in update function .
     requestAnimationFrame(animate);
 };
 animate();
-
-
-
-
-<html>
-   <body>
-      <script language = "javascript" type = "text/javascript">
-         <!--
-            document.write("Hello World!")
-         //-->
-      </script>
-   </body>
-</html>
