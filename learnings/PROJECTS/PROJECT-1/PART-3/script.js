@@ -7,27 +7,30 @@ const numberOfEnemeies=100;
 const enemeiesArray=[];
 
 // Importing new images for enemys 
-const enemyImage=new Image();
-enemyImage.src='/enemies/enemy1.png'
+// const enemyImage=new Image();
+// enemyImage.src='/enemies/enemy1.png'
 let gameFrame=0;
-this.flapSpeed=Math.floor(Math.random()*3+1);
+
 // In the below class we are going to create all the enemys .
 class Enemy{
     constructor(){
-        this.x=Math.random()*canvas.width; // This line will create random x- axis coordinate when ever i create a new enemy it can apply.
-        this.y=Math.random()*canvas.height; // This line will create random y- axis coordinate  same goes here . 
-      
+        this.image=new Image();
+        this.image.src='/enemies/enemy1.png';
         this.speed=Math.random()*4-2; // Random number between minus 2 and plus 2 , because some of enemys have to go in the left side and some of enemys have to go in right side , for right there is normal number and for left there is negative number.
         this.spriteWidth=293; // width of one frame of enemy1 png .
         this.spriteHeight=155;// Height of one frame of enemy1 png.
         this.width=this.spriteWidth/2.5; // setting the size of enemys 
         this.height=this.spriteHeight/2.5; // setting the size of enemys
-        this.frame=0;
+        this.x=Math.random()*(canvas.width-this.width); // By this line of code , coordinates will be in 100% within the canvas .this will apply horizontally.
+        this.y=Math.random()*(canvas.height-this.height); // Same goes for this as above but it will apply on vertically. 
+      
+        this.frame=0; 
+        this.flapSpeed=Math.floor(Math.random()*3+1);
     }
     // In the below line , this method will update coordindate of my objects it will handle position calculation and movement
     update(){
-       this.x+=this.speed; // For every frame increase by one and also increase y by one.
-       this.y+=this.speed;
+       this.x+=Math.random()*15-7.5; // In this line , they kind of stay in place and just wiggle around .
+       this.y+=Math.random()*10-5;
 
        // aniamte sprites 
        if(gameFrame%this.flapSpeed===0){
@@ -40,7 +43,7 @@ class Enemy{
         // ctx.strokeRect(this.x,this.y,this.width,this.height); // This will make a box around enemys 
         // In the below line ,calling built in draw image canvas method use to animate our butt sprite sheet.
         // In the below line , in this version of draw image method we are passing it nine arguments in total the first is the image we want to draw , the next four represent the area we want to crop out from the source sprite sheet and the last four arguement determine where on canvas we want to place that cropped out frame onto.
-        ctx.drawImage(enemyImage,this.frame*this.spriteWidth,0,this.spriteWidth,this.spriteHeight,this.x,this.y,this.width,this.height);
+        ctx.drawImage(this.image,this.frame*this.spriteWidth,0,this.spriteWidth,this.spriteHeight,this.x,this.y,this.width,this.height);
     }
 };
 // const enemy1=new Enemy(); // The new keyword will simply look at that class name in the above code it will enter its constructor ,it will create one new blank javaScript object and it will assign it values and properties based on a blueprint inside the constructor .
