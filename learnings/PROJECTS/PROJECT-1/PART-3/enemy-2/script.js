@@ -1,9 +1,19 @@
+/** 
+ *  ############################### Trignometry $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ * 
+ * --> is a branch of matematics that studies relationships between side lengths and angles of triangles we use it to create wavy and circular movement in our javaScript animations 
+ * 
+ * --> We will have a look at math.sine and math.cosine built in javaScript methods sine is trigonometric function of an angle defined in a context of a right triangle all we need to know for now is that market sign returns the sign of a number we pass to it that number represents angle value in radians and it returns numeric value between -1 and plus 1 . so this input angle value it takes if i put it inside animation loop and slowly start increasing it over time by very small amount when i pass this angle value to math.sine it will return series of values that endlessly cycles between -1 and plus 1 making it easy for us to convert these values into wavy movement so called sine wave .
+ */
+
+
+
 /** @type {HTMLCanvasElement}*/ // In this line ,this way i tell vs code this is a canvas project and it will suggest built-in html canvas methods for me.
 const canvas=document.getElementById('canvas1');
 const ctx=canvas.getContext('2d');
 CANVAS_WIDTH=canvas.width=500;
 CANVAS_HEIGHT=canvas.height=1000;
-const numberOfEnemeies=100;
+const numberOfEnemeies=20;
 const enemeiesArray=[];
 
 // Importing new images for enemys 
@@ -15,10 +25,10 @@ let gameFrame=0;
 class Enemy{
     constructor(){
         this.image=new Image();
-        this.image.src='/enemies/enemy1.png';
-        this.speed=Math.random()*4-2; // Random number between minus 2 and plus 2 , because some of enemys have to go in the left side and some of enemys have to go in right side , for right there is normal number and for left there is negative number.
-        this.spriteWidth=293; // width of one frame of enemy1 png .
-        this.spriteHeight=155;// Height of one frame of enemy1 png.
+        this.image.src='/enemies/enemy2.png';
+        this.speed=Math.random()*4+1; // Random number between minus 2 and plus 2 , because some of enemys have to go in the left side and some of enemys have to go in right side , for right there is normal number and for left there is negative number.
+        this.spriteWidth=266; // width of one frame of enemy1 png .
+        this.spriteHeight=188;// Height of one frame of enemy1 png.
         this.width=this.spriteWidth/2.5; // setting the size of enemys 
         this.height=this.spriteHeight/2.5; // setting the size of enemys
         this.x=Math.random()*(canvas.width-this.width); // By this line of code , coordinates will be in 100% within the canvas .this will apply horizontally.
@@ -26,11 +36,16 @@ class Enemy{
       
         this.frame=0; 
         this.flapSpeed=Math.floor(Math.random()*3+1);
+        this.angle=Math.random()*2; // This is the number that will be increasing and after being passed to my dot sign it will give us that series of value between -1 and plus 1
+        this.angleSpeed=Math.random()*0.2;
+        this.curve=Math.random()*7; // Getting random variable from 1 to 7 for the characters ups and downs curve.
     }
     // In the below line , this method will update coordindate of my objects it will handle position calculation and movement
     update(){
-       this.x+=Math.random()*15-7.5; // In this line , they kind of stay in place and just wiggle around .
-       this.y+=Math.random()*10-5;
+       this.x-=this.speed; // In this line , they all the enemy 2 is moving towards right hand side. .
+       this.y+=this.curve*Math.sin(this.angle); // *3 now we are getting the value of -3 and plus 3 . because this line of code we can make the curve more prominent.
+       this.angle+=this.angleSpeed; // now we are increasing the value of angle by 0.2 in every frame.by creating random numbers in line number 40.
+       if(this.x+this.width<0)this.x=canvas.width; // In this line , due to this line endless right to left movement of enemy2 is created.
 
        // aniamte sprites 
        if(gameFrame%this.flapSpeed===0){
@@ -83,3 +98,7 @@ function animate(){
     requestAnimationFrame(animate); // By using this line , we are looping this function.
 }
 animate();
+
+
+
+
