@@ -1,1 +1,27 @@
 /** Collision detection is important if you want to build the javascript games and you need to detect when two elements collide or when you are building particle systems where objects interact with each other or maybe you want your canvas animations to interact with regular website elements for most projects all we need is simple collision dectection algorithm between two rectangles or between two circles for more complex shapes we also use collision detection technique called separating axis theorem it can be used to detect collision between convex polygons or rectangles that are rotated and aren't axis alinged you might also have more specific needs for your games or creative coding projects some of other common scenarios are collision detection between point and circle, point and square , between line and circle , between line and square , between two lines and so on it becomes more complex when you need to dectect collisions where shapes such as convex and concave polygons are involved there are some clever tricks people came up with to handle these more advanced scenarios such as detecting collision by color or projecting lines from a point and checking if the number of intersections between that line and polygon is odd or even a number with more complex shapes its a good practice to wrap them in simple rectangles and only runs advanced collision checks if these rectangles collide and we know that the shapes are close enough and collision is possible for many games all you need is to create a generic shape around our objects so called hitbox even though the collision is not pixel perfect we can adjust these hitboxes to roughly match collision areas of objects with different shapes main advantage is that the code is very simple and performant because it donesn't require complex calculations to determine whether two objects collide or not these hitboxes can have shape or rectangle circle or polygon the simple collision detection algorithm is between two rectangles are axis aligned it means that they are not rotated it simply compares x and y coordinates and width and height of these two rectangles if they overlap we get collision if there is a gap between them we know there is no collision let me show  */
+
+
+Here is an example of code for collision --> 
+<script>
+    var rect1={x:5,y:5,width:50,height:50};
+    var rect2={x:20,y:10,width:10,height:10};
+
+    // if(rect1.x<rect2.x+rect2.width && rect1.x+rect1.width>rect2.x &&rect1.y<rect2.y+rect2.height && rect1.y+rect1.height>rect2.y)
+        if(rect1.x>rect2.x+rect2.width || rect1.x+rect1.width<rect2.x ||rect1.y>rect2.y+rect2.height || rect1.y+rect1.height<rect2.y){
+// Collision detected
+    }else{
+// No collision detected
+    }
+</script>
+
+
+
+// ################# Collision detection between circles ########################
+
+/** Collision detection is important if you want to build partcle systems where elements interact with each other or when you are building JavaScript games and you want to detect when two object collide or maybe when you want your canvas animations to interact with regular website elements three of the most common techniques we use for games and creative coding are collision detection between circles rectangles and polygons there are also other potential scenarios and some clever people came up with interesting ways how to detect them with code some are easier than others one of the most useful ones is collision detection between two circles you can detect if two circles collide with JavaScript very easily the algorithm just takes two center of our circles and checks if the distance between them is less than the radii of these two circle added together here is an example in the code form */
+
+
+
+
+
+
