@@ -20,8 +20,26 @@ Here is an example of code for collision -->
 
 /** Collision detection is important if you want to build partcle systems where elements interact with each other or when you are building JavaScript games and you want to detect when two object collide or maybe when you want your canvas animations to interact with regular website elements three of the most common techniques we use for games and creative coding are collision detection between circles rectangles and polygons there are also other potential scenarios and some clever people came up with interesting ways how to detect them with code some are easier than others one of the most useful ones is collision detection between two circles you can detect if two circles collide with JavaScript very easily the algorithm just takes two center of our circles and checks if the distance between them is less than the radii of these two circle added together here is an example in the code form */
 
+Here is an code example below :-
 
+<script>
+    //If the distancte between these two center points is MORE than radius of circle1 PLUS radius of circl2 we know they can't collide.if the distance is the same we know they touch and if the distance is smaller then SUM of these two radii added together we know the circles overlap they collide.
+    const circle1={x:10,y:10,radius:300};
+    const circle2={x:500,y:500,radius:150};
 
+        // Pythagoras theorem :- Allows us to calculate relations among the three sides of right traiangle.
+        // Pythagorase will use to find the distance between the two circles .
+    let dx=circle2.x-circle1.x;
+    let dy=circle2.y-circle.y;
+    let distance =Math.sqrt(dx*dx+dy*dy);
+    let sumOfRadii=circle1.radius+circle2.radius;
 
-
+if(distance<sumOfRadii){ // the distance is less than radius of circle 1 plus radius of circle 2 then we have collision
+    //circle collide
+}else if(distance===sumOfRadii){ // the distance is exactly the same number as the sum of radius of circle 1 plus radius of circle 2 we know they touch
+    //circles are touching 
+}else if(distance>sumOfRadii){ //if the distance is more we know there is some space between the circles and they don't collide
+    //no collision 
+}
+</script>
 
