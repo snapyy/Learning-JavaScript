@@ -26,7 +26,7 @@ class Explosion{
         this.sound.src='/music/boom.wav';
     }
     update(){
-        if(this.frame===0)this.sound.play();
+        if(this.frame===0)this.sound.play(); // every time frame equal to zero then the sound will play.
         this.timer++; 
         if(this.timer%10===0){
         this.frame++; // This will increase frame horizontally to create animations.
