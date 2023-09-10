@@ -33,11 +33,11 @@ class Explosion{
         };  
     }
     draw(){
-        ctx.save();
-        ctx.translate(this.x,this.y);
-        ctx.rotate(this.angle);
-        ctx.drawImage(this.image,this.spriteWidth*this.frame,0,this.spriteWidth,this.spriteHeight,0-this.width/2,0-this.height/2,this.width,this.height);
-        ctx.restore();
+        ctx.save(); // saving the current state of canvas to make sure the following changes affect only one day call
+        ctx.translate(this.x,this.y); // Rotating animation in a center of cursor.
+        ctx.rotate(this.angle); // each of them will rotated by a different random anglue value which is define in a Explosions class.
+        ctx.drawImage(this.image,this.spriteWidth*this.frame,0,this.spriteWidth,this.spriteHeight,0-this.width/2,0-this.height/2,this.width,this.height); 
+        ctx.restore();  //restore canvas context to the original save point to make sure this translate and rotate only affects one draw call of one object.
     }
 }
 window.addEventListener('click',function(e){
