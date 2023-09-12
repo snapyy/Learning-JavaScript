@@ -12,11 +12,16 @@ collisionCanvas.height=window.innerHeight;
 let score =0;
 let gameOver=false;
 ctx.font='50px Impact';
+// In the below line , a variable that will accumulate millisecond values between frames until it reaches my interval value and trigger next frame.
 let timeToNextRaven=0;
 let ravenInterval=500;
+// In the below line , a variable which will hold the value of  timestamp from the previous loop the initial value will be 0;
 let lastTime=0;
-let ravens=[];
+// In the below line , it will hold all the objects of all the ravens
+let ravens=[]; 
+
 class Raven{
+    // In the below constructor will create one blank new object every time it is called and it will assign it properties and values as we define them within constructor.
     constructor(){
         this.spriteWidth=271;
         this.spriteHeight=194;
@@ -24,8 +29,11 @@ class Raven{
         this.width=this.spriteWidth*this.sizeModifier;
         this.height=this.spriteHeight*this.sizeModifier;
         this.x=canvas.width;
-        this.y=Math.random()*(canvas.height-this.height);
+        //vertical y coordinate will be a random number between 0 and canvas height since rectangles on canvas are drawn from top left corner going right and down i don't want any ravens to be partially hidden below the bottom edge of 
+        this.y=Math.random()*(canvas.height-this.height); 
+        // In the below line , x will be horizontal speed basically it will be a random number between 3 and 8.
         this.directionX=Math.random()*5+3;
+        // In the below line , ravens will bounce up and down as they fly so the initial vertical speed i call direction y for example will be a random between minus 2.5 and plus 2.5 --> Minus values will move upwards and plus values will move the raven downwards.
         this.directionY=Math.random()*5-2.5;
         this.markedForDeletion=false;
         this.image=new Image();
@@ -38,6 +46,7 @@ class Raven{
         this.color='rgb(' +this.randomColors[0]+','+ this.randomColors[1]+ ',' +this.randomColors[2]+ ')';
         this.hasTrail=Math.random()>0.5;
     }
+    //Update method will move the raven around and adjust any values that needs to adjusted before we draw the next frame
     update(deltatime){
         if(this.y<0 || this.y>canvas.height-this.height){
             this.directionY=this.directionY*-1;
@@ -59,6 +68,7 @@ class Raven{
         }
         if(this.x<0-this.width) gameOver=true;
     }
+    //Draw method will take these updated values from update method and any drawing code we put here will represent single raven object visually .
     draw(){
         collisionCtx.fillStyle=this.color;
         collisionCtx.fillRect(this.x,this.y,this.width,this.height);
@@ -155,12 +165,19 @@ ravens.forEach(object=>{
     }
 });
 });
+
+// In the below line , it creates animation loop and it will take arguement i call timestamp this will be a numeric value in milliseconds . so one second will be number 1000 , this functions works any code inside this animation function will run over and over updating and drawing our game frame by frame. 
 function animate(timestamp){
+    // In the below line , between every frame is clear old paint all the drawings from the previous frame , so clear rectangle and i want to clear the entire canvas from coordinates 0,0, to canvas width and canvas height. 
     ctx.clearRect(0,0,canvas.width,canvas.height);
     collisionCtx.clearRect(0,0,canvas.width,canvas.height);
+
+    // In the below line code , inside this function animation loop , i will calculate delta time this will be a value in a milliseconds between timestamp from this loop amd saved timestamp value from the previous loop
     let deltatime=timestamp-lastTime;
+    //In the below line , after calculating delta time i will assign last time variable from global declartion of variable lastTime to the new timeStamp passed here in this loop.so that we have that value ready to compare in the next loop  
     lastTime=timestamp;
     timeToNextRaven+=deltatime;
+    // In the below line , when time to next raven reaches this raven interval then i will pass it new raven which will trigger my raven class constructor create one new raven object and it will push it inside raven's array, when that happens i set time to next raven back to zero so it can start counting again from the beginning .
 if(timeToNextRaven>ravenInterval){
     ravens.push(new Raven());
     timeToNextRaven=0; 
@@ -169,12 +186,17 @@ if(timeToNextRaven>ravenInterval){
     });
 };
 drawScore();
-[...particles,...ravens,... explosions].forEach(object=>object.update(deltatime));
-[...particles,...ravens,...explosions].forEach(object=>object.draw());
-ravens=ravens.filter(object=>!object.markedForDeletion);
-explosions=explosions.filter(object=>!object.markedForDeletion);
+// In the below line , we are creating array literal  , using [] square brackets in that ... are called spread operator , now we are spreading my ravens array inside this new quick array , spread operator allows us to spread iterable such as this ravens array to be expanded into another array 
+[...particles,...ravens,... explosions].forEach(object=>object.update(deltatime)); // For each is used to iterate all the object, so this line of code will cycle through the entire ravens array and it will trigger update method on all of them.since we are inside animation loop this will happen over and over for each animation frame.
+[...particles,...ravens,...explosions].forEach(object=>object.draw()); 
+ravens=ravens.filter(object=>!object.markedForDeletion); //same as above
+explosions=explosions.filter(object=>!object.markedForDeletion);    
 particles=particles.filter(object=>!object.markedForDeletion);
+// In the below line , if the game is not over then requestAnimationFrame will that will call animate again create an endless animation loop.
    if(!gameOver) requestAnimationFrame(animate);
    else drawGameOver();
 }
+
 animate(0);
+
+// Instead of having one raven i want to create a new raven periodically and i want to make sure that periodically event is triggered at the same interval on very slow old computers and on brand new gaming super pcs to make sure the timings in my game are consistent and based on time and milliseconds rather than on the power of my computer and its ability to serve frames at a certain speed i will use timestamps i will compare how many milliseconds elapsed since the last loop and only when we reach certain amount of time between frames only then we will draw next frame.
