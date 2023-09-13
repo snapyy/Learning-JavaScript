@@ -73,6 +73,7 @@ class Raven{
             }
     
         }
+        // Here below code for game over.
         if(this.x<0-this.width) gameOver=true;
     }
     //Draw method will take these updated values from update method and any drawing code we put here will represent single raven object visually .
@@ -83,21 +84,26 @@ class Raven{
     }
 }
 let explosions=[];
+//In the below class , it will hold all active animated explosison objects  , for this we are creating a class for the blue print for these objects
 class Explosions{
     constructor(x,y,size){
+        // In the below line , we are fecthing our image 
         this.image =new Image();
         this.image.src='/images/boom.png';
         this.spriteWidth=200;
         this.spriteHeight=179;
         this.size=size;
         this.x=x;
-        this.y=x;   
+        this.y=y; 
+        this.frame=0;  
+        // In the below line we are fetching our sound. 
         this.sound=new Audio();
         this.sound.src='/music/boom.wav';
         this.timeSinceLastFrame=0;
         this.frameInterval=200;
         this.markedForDeletion=false;
     }
+    // In the below function , we are going to play our sound when the frame becoms 0 when it destroy   
     update(deltatime){
         if(this.frame===0) this.sound.play();
         this.timeSinceLastFrame+=deltatime;
@@ -108,10 +114,12 @@ class Explosions{
         }
         
     }
+    // In the below function , we are going to show animation if raven were hit by user .
     draw(){
-        ctx.drawImage(this.image,this.frame*this.spriteWidth,this.spriteHeight,0,this.spriteWidth,this.spriteHeight,this.x,this.y-this.size/4,this.size,this.size);
+        ctx.drawImage(this.image,this.frame*this.spriteWidth,0,this.spriteWidth,this.spriteHeight,this.x,this.y-this.size/4,this.size,this.size);
     }
 }
+// In the below class we are going to create one special effect , which can be seen on ravens 
 let particles=[];
 class Particle{
     constructor(x,y,size,color){
@@ -146,7 +154,9 @@ function drawScore(){
     ctx.fillStyle='white'
     ctx.fillText('Score: '+score,55,80)
 }
+// Here below function, it will Show the message after the is gameOver and also show the score .
 function drawGameOver(){
+    // In the below line we are centring the text of game over on canvas.
     ctx.textAlign='center';
     ctx.fillStyle='black';
     ctx.fillText('GAME OVER, Your score is ' +score,canvas.width/2,canvas.height/2);
@@ -164,12 +174,15 @@ window.addEventListener('click',function(e){
 // In the below line we are decting what color is the pixel we are clicking on  . getImageData is built method simply scans area canvas and returns an array like object called uint8 clamped array.it's a simple data structure full of unassigned 8-bit integers, its clamped which means it can contain only integers ,whole numbers between certain value range specifically between 0 to 255 value range
 const detectPixelColor=collisionCtx.getImageData(e.x,e.y,1,1);  // we need coordinate of one pixel on which we click , that's why 1,1.
 console.log(detectPixelColor); // mouse click and it gives us auto-generated object contain three properties data property which is an array currently it has four numbers inside and within height of scanned area in our case one pixel . The way color data is structured is that each four elements in this data array represent one pixel specifically its red ,green , blue and alpha value . if you use css you know that any color can be created combining a certain amount of red , green and blue the only difference between css rgba declation and the upper thing is that in css opacity is a value between 0 and 1 . here in the upper thing opactiy alpha is also a number between 0 and 255 , 0 is transparent , 255 is fully visible .
-const pc=detectPixelColor.data;
+const pc=detectPixelColor.data; //saving the data of click in pc hold data.
+
+// In the below line , for each raven object in the array i will check if its random colors property , if the randomColor is equl to pc data which is store in the above then it will markedForDeletion will be true for all three colors and score will increase and then explosions will be happend 
 ravens.forEach(object=>{
-    if(object.randomColors[0]===pc[0] && object.randomColors[1]===pc[1] && object.randomColors[2]===pc[2]){
+    if(object.randomColors[0]===pc[0] && object.randomColors[1]===pc[1] && object.randomColors[2]===pc[2]){ // we are checking for every index of array in for each loop.
         //collisionDetected
         object.markedForDeletion=true;
         score++;
+        // In the below line , pushing new explosion in there this will trigger explosion class constructor 
         explosions.push(new Explosions(object.x,object.y,object.width));
         console.log(explosions)
     }
