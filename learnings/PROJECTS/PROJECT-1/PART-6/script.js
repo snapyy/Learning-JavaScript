@@ -52,7 +52,9 @@ document.addEventListener('DOMContentLoaded', function () {
             this.game = game;
             // console.log(this.game);
             this.markedForDeletion = false;
-            this.frameX;
+            // In the below line , this varibale is used to change the frame for animation .
+            this.frameX=0;
+            // In the below line , this variable is used to declare the maximum size of frames .
             this.maxFrame=5;
             this.frameInterval=100;
             this.frameTimer=0;
@@ -70,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         draw(ctx) {
-         
             ctx.drawImage(this.image, this.frameX*this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
         }
     }
@@ -102,11 +103,14 @@ document.addEventListener('DOMContentLoaded', function () {
             this.image = ghost;
             // In the below line , randomizing the speed of worms .
             this.vx = Math.random() * 0.2 + 0.1; //vx stands for velocity x axis
+            // In the below line , both variables will use to change the direction of ghost.
             this.angle=0;
             this.curve=Math.random()*3;
         }
         update(deltaTime){
+            // In the below line , this will run the code from the enemy class 
             super.update(deltaTime);
+            // In the below line , we are changing the angle of the ghost by using sin add 0.0.4 .
             this.y+=Math.sin(this.angle)*this.curve;
             this.angle+=0.04;
            
@@ -114,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
         draw(ctx){
             // In the below line , we saving the state of the game.
             ctx.save();
-            // In the below line we are setting opacity of all enemy globallly.
+            // In the below line we are setting opacity of all enemy globallly,but we are going to apply only on ghost. you can go through upper line the last line of this function those lines are used , so that we can only apply this opactiy effect on the ghost only.
             ctx.globalAlpha=0.7;
             super.draw(ctx);
             // Restoring after applying opacity in the ghost.
@@ -128,6 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
             this.spriteHeight = 175;
             this.width = this.spriteWidth / 2;
             this.height = this.spriteHeight / 2;
+            // In the below line , set their horizontal coordinate to be a random number between zero and game width
             this.x = Math.random()*this.game.width;
             this.y = 0-this.height;
             this.image = spider;
@@ -140,14 +145,20 @@ document.addEventListener('DOMContentLoaded', function () {
     update(deltaTime){
         super.update(deltaTime);
         if (this.y < 0 - this.height*2) this.markedForDeletion = true;
-        this.y+=this.vy*deltaTime;
+        this.y+=this.vy*deltaTime; // speed of spiders will decided as per deltaTime , so that we get consistency on different machines
+        // In the below line , we are revert vy -1 , so the spider will go up after coming down.
         if(this.y>this.maxLength)this.vy*=-1;
     }
     draw(ctx){
+        // In the below line , it will create path from begining from where the spiders come and go up.
         ctx.beginPath();
+        // In the below line , build in canvas move to method to set starting coordinates of the line .
         ctx.moveTo(this.x+this.width/2,0);
+        // In the below line , build in canvas line to method to set ending coordinates of the line .
         ctx.lineTo(this.x+this.width/2,this.y+10);
+        // refers to the outline or border of a shape or path, rather than filling it with a solid color.
         ctx.stroke();
+        // In the below line , we applying the parent code in this function.
         super.draw(ctx);
     }
     }
