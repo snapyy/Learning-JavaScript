@@ -73,6 +73,7 @@ window.addEventListener('load', function () {
             this.speed = 0;
             this.vy = 0;
             this.weight = 1;
+            this.jumping=false;
         }
         restart() {
             this.x = 100;
@@ -97,7 +98,7 @@ window.addEventListener('load', function () {
                 if (distance < enemy.width / 3 + this.width / 3) {
                     gameOver = true;
                 }
-            });
+            }); 
             // sprite animation 
             if (this.frameTimer > this.frameInterval) {
                 if (this.frameX >= this.maxFrame) this.frameX = 0;
@@ -114,7 +115,8 @@ window.addEventListener('load', function () {
                 this.speed = -5;
             }
             else if ((input.keys.indexOf('ArrowUp') > -1 ||input.keys.indexOf('swipe up') >-1 )&& this.onGround()) {
-                this.vy -= 32;
+                this.vy =- 28;
+                this.jumping=true;
             }
             else {
                 this.speed = 0;
@@ -132,12 +134,13 @@ window.addEventListener('load', function () {
                 this.frameY = 1;
                 this.maxFrame = 5;
                 this.frameY = 1;
+                this.jumping =false;
             } else {
                 this.vy = 0;
                 this.maxFrame = 8;
                 this.frameY = 0;
             }
-            if (this.y > this.gameHeight - this.height) this.y = this.gameHeight - this.height
+            if (this.y > this.gameHeight - this.height) this.y = this.gameHeight - this.height;
         }
         onGround() {
             return this.y >= this.gameHeight - this.height;
@@ -151,7 +154,7 @@ window.addEventListener('load', function () {
             this.x = 0;
             this.y = 0;
             this.width = 2400;
-            this.height720;
+            this.height=720;
             this.speed = 7;
         }
         draw(context) {
@@ -229,11 +232,30 @@ window.addEventListener('load', function () {
         context.fillStyle = 'white';
         context.fillText('Score: ' + score, 20, 52);
         if (gameOver) {
-            context.textAlin = 'center';
-            context.fillStyle = 'black';
-            context.fillText(' GAME OVER, press Enter or swipe to restart to restart ! try again!: ', canvas.width / 2, 200);
-            context.fillStyle = 'white';
-            context.fillText(' GAME OVER, press Enter or swipte to restart ! try again!: ', canvas.width / 2 + 2, 202);
+            if (gameOver) {
+                // Below code chatgpt
+                // Set text alignment to center
+                context.textAlign = 'center';
+                
+                // Set text properties
+                context.fillStyle = 'black';
+                context.font = '30px Arial'; // Adjust font size and style as needed
+                
+                // Define the text to display
+                var text = 'GAME OVER, press Enter or swipe to restart! Try again!';
+                
+                // Calculate the center coordinates for both x and y
+                var centerX = canvas.width / 2;
+                var centerY = canvas.height / 2;
+                
+                // Draw the text at the center
+                context.fillText(text, centerX, centerY);
+                
+                // You can add additional styling or shadow effects as desired
+                context.fillStyle = 'white';
+                context.fillText(text, centerX + 2, centerY + 2);
+            }
+            
         }
     }
     function restartGame() {
