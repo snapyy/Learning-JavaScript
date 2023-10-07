@@ -20,7 +20,7 @@ window.addEventListener('load', function () {
             //Es6 arrow functions :- don't blind their own 'this', but they inherit the one from their parent scope , this is called lexical scoping .
             window.addEventListener('keydown', e => {
                 // In the below line , if the key that was pressed is arrow down and if that key is not yet inside in e.key array only then push it into the array .
-                if (e.key === 'ArrowDown' || e.keys === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'ArrowRight' && this.keys.indexOf(e.key) === -1) {
+                if (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'ArrowRight' && this.keys.indexOf(e.key) === -1) {
                     this.keys.push(e.key);
                 }else if(e.key==='Enter' && gameOver) restartGame();
 
@@ -49,7 +49,7 @@ window.addEventListener('load', function () {
             window.addEventListener('touchend',e=>{
                 // console.log('end');
                 this.keys.splice(this.keys.indexOf('swipe up'),1);
-                this.keys.splice(this.keys.indexOf('down up'),1);
+                this.keys.splice(this.keys.indexOf('swipe down'),1);
             });
             
         }
@@ -65,7 +65,6 @@ window.addEventListener('load', function () {
             this.image = document.getElementById('playerImage');
             this.frameX = 0;
             this.maxFrame = 8;
-            this.frameX = 0;
             this.frameY = 0;
             this.fps = 20;
             this.frameTimer = 0;
@@ -73,7 +72,7 @@ window.addEventListener('load', function () {
             this.speed = 0;
             this.vy = 0;
             this.weight = 1;
-            this.jumping=false;
+           
         }
         restart() {
             this.x = 100;
@@ -82,11 +81,7 @@ window.addEventListener('load', function () {
             this.frameY = 0;
         }
         draw(context) {
-            context.lineWidth=5;
-            context.strokeStyle='white';
-            context.beginPath();
-            context.arc(this.x + this.width / 2, this.y + this.height / 2+20, this.width / 3, 0, Math.PI * 2);
-            context.stroke();
+           
             context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height, this.width, this.height, this.x, this.y, this.width, this.height);
         }
         update(input, deltaTime, enemies) {
@@ -94,7 +89,7 @@ window.addEventListener('load', function () {
             enemies.forEach(enemy => {
                 const dx = (enemy.x + enemy.width / 2-20) - (this.x + this.width / 2);
                 const dy = (enemy.y + enemy.height / 2) - (this.y + this.height / 2+20);
-                const distance = Math.sqrt(dx * dx * dy);
+                const distance = Math.sqrt(dx * dx * dy*dy);
                 if (distance < enemy.width / 3 + this.width / 3) {
                     gameOver = true;
                 }
@@ -115,8 +110,8 @@ window.addEventListener('load', function () {
                 this.speed = -5;
             }
             else if ((input.keys.indexOf('ArrowUp') > -1 ||input.keys.indexOf('swipe up') >-1 )&& this.onGround()) {
-                this.vy =- 28;
-                this.jumping=true;
+                this.vy -= 30;
+               
             }
             else {
                 this.speed = 0;
@@ -131,10 +126,9 @@ window.addEventListener('load', function () {
             this.y += this.vy;
             if (!this.onGround()) {
                 this.vy += this.weight;
-                this.frameY = 1;
                 this.maxFrame = 5;
                 this.frameY = 1;
-                this.jumping =false;
+               
             } else {
                 this.vy = 0;
                 this.maxFrame = 8;
@@ -179,6 +173,7 @@ window.addEventListener('load', function () {
             this.image = document.getElementById('enemyImage');
             this.x = this.gameWidth;
             this.y = this.gameHeight - this.height;
+            this.frameX=0;
             this.maxFrame = 5;
             this.fps = 20;
             this.frameTimer = 0;
@@ -187,11 +182,8 @@ window.addEventListener('load', function () {
             this.markedForDeletion = false;
         }
         draw(context) {
-            context.strokeStyle='white';
-            context.beginPath();
-            context.arc(this.x + this.width / 2-20, this.y + this.height / 2, this.width / 3, 0, Math.PI * 2);
-            context.stroke();
             context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.x, this.y, this.width, this.height);
+            
         }
         update(deltaTime) {
 
@@ -287,12 +279,13 @@ window.addEventListener('load', function () {
     let enemyTimer = 0;
     let enemyInterval = 2000;
     let randomEnemyInterval = Math.random() * 1000 + 500;
+
     function animate(timeStamp) {
         const deltaTime = timeStamp - lastTime;
         lastTime = timeStamp;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         background.draw(ctx);
-        // background.update();
+        background.update();
         player.draw(ctx);
         player.update(input, deltaTime, enemies);
         handleEnemies(deltaTime);
