@@ -6,11 +6,12 @@
 
 import {StandingLeft,StandingRight,SittingLeft,SittingRight,RunningLeft,RunningRight,JumpingLeft,JumpingRight,FallingLeft,FallingRight} from "./state.js";
 
+// Encapsulation :- Means we wrap variables or data and functions that operate on that data into objects. ENCAPSULATION can be used to protect our data from unwanted outside access , it simplifies maintainance of our code by keeping it orgainised and easier to understand.
 export default class Player{
     constructor(gameWidth,gameHeight){
         this.gameWidth=gameWidth;
         this.gameHeight=gameHeight; 
-        this.states=[new StandingLeft(this),new StandingRight(this),new StandingLeft(this), new StandingRight(this), new RunningLeft(this),new RunningRight(this),new JumpingLeft(this),new JumpingRight(this),new FallingLeft(this),new FallingRight(this)];
+        this.states=[new StandingLeft(this),new StandingRight(this),new SittingLeft(this), new SittingRight(this), new RunningLeft(this),new RunningRight(this),new JumpingLeft(this),new JumpingRight(this),new FallingLeft(this),new FallingRight(this)];
         this.currentState=this.states[1];
         this.image=document.getElementById("dogImage");
         this.width=200;
@@ -46,7 +47,7 @@ export default class Player{
         else if(this.x>=this.gameWidth-this.width) this.x=this.gameWidth-this.width;
         // vertical movement
         this.y+=this.vy;
-        if(!this.onGround){
+        if(!this.onGround()){
             this.vy+=this.weight;
         }else{
             this.vy=0;
@@ -58,6 +59,6 @@ export default class Player{
         this.currentState.enter();
     }
     onGround(){
-        return this.y>=this.gameWidth-this.height
+        return this.y>=this.gameHeight-this.height
     }
 }
