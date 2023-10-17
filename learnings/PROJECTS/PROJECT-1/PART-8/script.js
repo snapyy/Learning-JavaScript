@@ -1,5 +1,7 @@
+// Two types of exports : (1) Name exports (2) Default exports
 import Player from "./player.js";
 import InputHandler from "./input.js";
+import { drawStatusText } from "./utils.js";
 // Load event :- will wait for the entire page to be fully loaded and available including page content such as stylesheets,images and so on
 window.addEventListener('load',function(){
     const loading= document.getElementById('loading');
@@ -10,8 +12,17 @@ window.addEventListener('load',function(){
     canvas.height=window.innerHeight;
 
     const player = new Player(canvas.width,canvas.height);
-    player.draw(ctx);
-
     const input=new InputHandler();
-    console.log(input.lastkey);
+
+    let lastTime=0;
+    function animate(timeStamp){
+        const deltaTime= timeStamp-lastTime;
+        lastTime=timeStamp;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        player.update(input.lastkey);   
+        player.draw(ctx,deltaTime);
+        drawStatusText(ctx,input,player);
+        requestAnimationFrame(animate);
+    };
+    animate(0);
 });
