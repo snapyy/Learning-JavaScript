@@ -1,5 +1,6 @@
 // State Design Pattern :-allows objects to change their behaviour based on their current state  , In each state we can limit what keys player will react to and we can write logic that defines behaviour for each key press seprately
 
+// we will use ENUM to define a set of named constants.
 export const states={
     STANDING_LEFT:0,
     STANDING_RIGHT:1,
@@ -19,6 +20,7 @@ class State {
     }
 }
 //Child Class :- also   called "Sub "Class
+//Extends :- keywords is used to create a child class.
 //Inheritance :-  is a process where one class inherits attribute and methods from another class . We use it to avaoid code repetition.
 export class StandingLeft extends State{
     constructor(player){
@@ -27,9 +29,9 @@ export class StandingLeft extends State{
         this.player=player;
     }
     enter(){
-        this.player.frameY=1;
+        this.player.frameY=9;
         this.player.speed=0;
-        this.player.maxFrame=6;
+        this.player.maxFrame=4;
     }
     handleInput(input){
         if(input === 'PRESS right') this.player.setState(states.RUNNING_RIGHT);//set state to StandingRight
@@ -56,7 +58,7 @@ export class StandingRight extends State{
         if(input === 'PRESS left  ')this.player.setState(states.RUNNING_LEFT); //set state to StandLeft
         else if(input==  'PRESS right')this.player.setState(states.RUNNING_RIGHT)
         else if(input === 'PRESS down')this.player.setState(states.SITTING_RIGHT);
-        else if (input === 'PRESS up')this.player.setState(states.JUMPING_LEFT)
+        else if (input === 'PRESS up')this.player.setState(states.JUMPING_RIGHT);
 
     }
 }
@@ -74,8 +76,7 @@ export class SittingLeft extends State  {
     }
     handleInput(input){
         if(input === 'PRESS right')this.player.setState(states.SITTING_RIGHT);
-        // else if(input ==="PRESS up") this.player.setState(states.STANDING_LEFT);
-        else if(input === 'RELEASE down')this.player.setState(states.SITTING_LEFT);
+        else if(input === 'RELEASE down')this.player.setState(states.STANDING_LEFT);
     }
 }
 
@@ -91,10 +92,8 @@ export class SittingRight extends State  {
 
     }
     handleInput(input){
-        if(input === 'PRESS right')this.player.setState(states.SITTING_LEFT);
-      
-        else if(input === 'RELEASE down')this.player.setState(states.SITTING_RIGHT);
-
+        if(input === 'PRESS left')this.player.setState(states.SITTING_LEFT);
+        else if(input === 'RELEASE down')this.player.setState(states.STANDING_RIGHT);
     }
 }
 
@@ -110,11 +109,10 @@ export class RunningLeft extends State  {
 
     }
     handleInput(input){
-        if(input === 'PRESS right')this.player.setState(states. RUNNING_RIGHT);
-       
-        else if(input === 'RELEASE left')this.player.setState(states.SITTING_LEFT);
+        if(input === 'PRESS right')this.player.setState(states.RUNNING_RIGHT);
+        else if(input === 'RELEASE left')this.player.setState(states.STANDING_LEFT);
         else if(input === 'PRESS down')this.player.setState(states.SITTING_LEFT);
-
+        
     }
 }
 
@@ -131,10 +129,9 @@ export class RunningRight extends State  {
 
     }
     handleInput(input){
-        if(input === 'PRESS left')this.player.setState(states. RUNNING_LEFT);
-       
-        else if(input === 'RELEASE right')this.player.setState(states.SITTING_RIGHT);
-        else if(input === 'PRESS down')this.player.setState(states.STANDING_LEFT);
+        if(input === 'PRESS left')this.player.setState(states.RUNNING_LEFT);
+        else if(input === 'RELEASE right')this.player.setState(states.STANDING_RIGHT);
+        else if(input === 'PRESS down')this.player.setState(states.SITTING_RIGHT);
         else if(this.player.vy>0)this.player.setState(states.FALLING_LEFT);
     }
 }
@@ -152,9 +149,9 @@ export class JumpingLeft extends State  {
 
     }
     handleInput(input){
-        if(input == 'PRESS right ')this.player.setState(states.SITTING_RIGHT);
+        if(input == 'PRESS right ')this.player.setState(states.JUMPING_RIGHT);
         else if(this.player.onGround())this.player.setState(states.STANDING_LEFT);
-        else if(this.player.vy>0)this.player.setState(states.FALLING_RIGHT);
+        else if(this.player.vy>0)this.player.setState(states.FALLING_RIGHT);    
 
     }
 }
@@ -173,8 +170,9 @@ export class JumpingRight extends State  {
       
     }
     handleInput(input){
-        if(input == 'PRESS left ')this.player.setState(states.SITTING_RIGHT);
+        if(input == 'PRESS left ')this.player.setState(states.JUMPING_RIGHT);
         else if(this.player.onGround())this.player.setState(states.STANDING_RIGHT);
+        else if(this.player.vy>0)this.player.setState(states.FALLING_RIGHT);
 
     }
 }
