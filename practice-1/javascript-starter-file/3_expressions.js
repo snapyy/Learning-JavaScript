@@ -114,7 +114,7 @@
 
 //? Not Equal (!=   👉 ! =):
 // Checks if two values are not equal, performing type coercion if necessary.
-console.log(5 != "5");
+// console.log(5 != "5");
 
 //? Greater Than (>):
 // Checks if the value on the left is greater than the value on the right.
@@ -176,7 +176,14 @@ console.log(5 != "5");
 // var age = 18;
 // var hadDrivingLicense = true;
 
+// console.log(age >= 18 && hadDrivingLicense );
+
 //! How would the result change if hasDriverLicense was set to false❓
+
+// var age = 18;
+// var hadDrivingLicense = false;
+
+// console.log(age >= 18 && hadDrivingLicense );
 
 //* ===================================
 //* 6: Conditional (ternary) operator
@@ -185,8 +192,20 @@ console.log(5 != "5");
 //? syntax: condition ? expressionIfTrue : expressionIfFalse;
 // ! write a program to check if the candidates isEligibleToDrive or not? Age must be equal to or greater then 18.
 
+let age = 15;
+
+// age <= 18
+//   ? console.log("Yes he/she can drive")
+//   : console.log("No he/she cannot drive");
+
 //! Q: Let's say you have a variable score representing a student's exam score. If the score is greater than or equal to 60, the student passes; otherwise, they fail. Use the conditional (ternary) operator to determine the result and store it in a variable called result. Log the result to the console❓
 
+// var result = 60;
+
+// result >= 60
+//   ? console.log("congratulation  He / She pass the exam")
+//   : console.log("Try again he / she fail in the exam");
+// console.log(result);
 //* ===================================
 //*  Combined Interview Questions
 //* ====================================
