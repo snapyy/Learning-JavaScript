@@ -345,6 +345,13 @@
 //   // Return the updated accumulator value
 // }, initialValue);
 
+const productPrice = [100, 200, 300, 400, 600, 500, 600, 700, 800, 900];
+
+const totalPrice = productPrice.reduce((accumulate, currElement) => {
+  return accumulate + currElement;
+}, 0);
+console.log(totalPrice);
+
 // callback: A function that is called once for each element in the array.
 // accumulator: The accumulated result of the previous iterations.
 // currentValue: The current element being processed in the array.
@@ -383,7 +390,7 @@
 
 //! 2 : Using the map method , write a function that takes a array of numbers and return a new array where each number is squared , but only if it's an even number
 
-const numbers = [1, 2, 3, 4, 6, 5, 6, 7, 8, 9];
+// const numbers = [1, 2, 3, 4, 6, 5, 6, 7, 8, 9];
 
 // const returningSquaredOfNumbers = numbers
 //   .map((currElement, index, arr) => {
