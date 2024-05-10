@@ -143,3 +143,66 @@
 // let result = str.split(",").reverse().join();
 
 // console.log(result);
+
+// !Question number 1
+
+// console.log("a".charCodeAt(0));
+// console.log("z".charCodeAt(0));
+
+// for (let char = 97; char <= 122; char++) {
+//   console.log(String.fromCharCode(char));
+// }
+
+// !Question number 2
+
+// const countVowels = (str) => {
+//   const vowels = "aeiou";
+//   let count = 0;
+//   for (let char of str) {
+//     // console.log(char);
+//     // console.log(str.includes(char));
+//     if (vowels.includes(char)) {
+//       count++;
+//     }
+//   }
+//   return count;
+// };
+
+// console.log(countVowels("My name is raate poote and i am not a terrorist "));
+
+//!Question number 3
+
+// const checkAllVowelPresentOrNot = (str) => {
+//   const vowels = "aeiou";
+//   for (let char of vowels) {
+//     // console.log(char);
+//     // console.log(str.includes(char));
+//     if (!str.includes(char)) {
+//       return false;
+//     }
+//   }
+//   return true;
+// };
+
+// console.log(
+//   checkAllVowelPresentOrNot("My name is raate poote and i am not a terrorist ")
+// );
+
+//!Question number 4:-
+
+const pangramChecker = (str) => {
+  let inputArr = str.toLowerCase().split("");
+  // console.log(inputArr);
+  // console.log("z".charCodeAt());
+  const values = inputArr.filter(
+    (currElement) =>
+      (currElement.charCodeAt() >= "a".charCodeAt()) &
+      (currElement.charCodeAt() <= "z".charCodeAt())
+  );
+  // console.log(values);
+
+  // return [...new Set(values)].length === 26;
+  return new Set(values).size === 26;
+};
+
+console.log(pangramChecker("The quick brown fox jumps over the lazy dog"));
